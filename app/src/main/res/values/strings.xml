@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Dicoding Storyposting</string>
+    <string name="title">Welcome to Dicoding Storyposting!</string>
+    <string name="title2">Start sharing your stories with others </string>
+    <string name="title3">Every story you share is important</string>
+    <string name="description1">Ready to start sharing your stories? Dive in and login to share stories. We can\'t wait to see what you\'ll create!</string>
+    <string name="description2">You can start by sharing your stories within our welcoming community and be inspired by fellow dicoding users</string>
+    <string name="description3">Your stories matter. They have the power to inspire others and make a difference in our community. Share yours today!</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="or">or</string>
+    <string name="guest">Login as a Guest</string>
+
+
+    <string name="error_password">Password must be more than 8 characters</string>
+    <string name="error_email">Please enter correct E-mail format</string>
+    <string name="register_here">Register here</string>
+    <string name="no_account">Don\'t have an account yet?</string>
+
+
+    <string name="story">Post your own story here....</string>
+    <string name="setting">Setting</string>
+    <string name="submit">Submit</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+    <string name="error_open_camera">Error opening the camera</string>
+</resources>
