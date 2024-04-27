@@ -1,6 +1,8 @@
 package com.belajar.storyapp.data.api.retrofit
 
 import com.belajar.storyapp.data.api.response.AllStoryResponse
+import com.belajar.storyapp.data.api.response.DetailResponse
+import com.belajar.storyapp.data.api.response.ListStoryItem
 import com.belajar.storyapp.data.api.response.LoginResponse
 import com.belajar.storyapp.data.api.response.RegisterResponse
 import com.belajar.storyapp.data.api.response.UploadResponse
@@ -12,6 +14,7 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -33,6 +36,11 @@ interface ApiService {
 
     @GET("stories")
     suspend fun getStories(): AllStoryResponse
+
+    @GET("stories/{id}")
+    suspend fun getDetailedStory(
+        @Path("id") id : String
+    ): DetailResponse
 
     @Multipart
     @POST("stories")

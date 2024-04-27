@@ -22,8 +22,8 @@ class HomepageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomepageBinding
 
-    val viewModelFactory = ViewModelFactory.getInstance(this)
-    val viewModel: HomepageViewModel by viewModels { viewModelFactory }
+    private val viewModelFactory = ViewModelFactory.getInstance(this)
+    private val viewModel: HomepageViewModel by viewModels { viewModelFactory }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,18 +64,22 @@ class HomepageActivity : AppCompatActivity() {
 //        Log.i("TOKENHOME", tokenFromMain.toString())
 
 
+        viewModel.getStories().observe(this) {
+            if (it != null) {
+                when (it) {
+                    is Result.Failure -> Toast.makeText(
+                        this@HomepageActivity,
+                        it.error,
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-            viewModel.getStories().observe(this) {
-                if (it != null) {
-                    when (it) {
-                        is Result.Failure -> Toast.makeText(this@HomepageActivity, it.error, Toast.LENGTH_SHORT).show()
-                        Result.Loading -> {}
-                        is Result.Success -> {
-                            it.let {
-                                adapter.submitList(it.data.listStory.orEmpty().mapNotNull { it })
+                    Result.Loading -> {}
+                    is Result.Success -> {
+                        it.let {
+                            adapter.submitList(it.data.listStory.orEmpty().mapNotNull { it })
 
-                            }
                         }
+                    }
 
                 }
             }

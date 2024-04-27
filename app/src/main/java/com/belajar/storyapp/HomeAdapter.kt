@@ -1,5 +1,6 @@
 package com.belajar.storyapp
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,12 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {
             Glide.with(binding.root)
                 .load(story.photoUrl)
                 .into(binding.imgPhoto)
+
+            binding.cardView.setOnClickListener {
+                val intent = Intent(binding.root.context, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_ID, story.id)
+                binding.root.context.startActivity(intent)
+            }
         }
 
     }
@@ -35,6 +42,11 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {
     override fun getItemCount(): Int = story.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(story[position])
+        val viewHolder = holder.bind(story[position])
+
+//        holder.itemView.setOnClickListener {
+//            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+//            intent.putExtra(DetailActivity.EXTRA_ID)
+//        }
     }
 }

@@ -3,6 +3,7 @@ package com.belajar.storyapp.helper
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.belajar.storyapp.DetailViewModel
 import com.belajar.storyapp.HomepageViewModel
 import com.belajar.storyapp.LoginViewModel
 import com.belajar.storyapp.MainViewModel
@@ -29,6 +30,9 @@ class ViewModelFactory(private val storyRepository: StoryRepository): ViewModelP
         }
         if (modelClass.isAssignableFrom(StoryViewModel::class.java)) {
             return StoryViewModel(storyRepository) as T
+        }
+        if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
+            return DetailViewModel(storyRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModal class: ${modelClass.name}")
 

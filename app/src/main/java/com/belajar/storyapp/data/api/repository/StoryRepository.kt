@@ -9,6 +9,8 @@ import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.belajar.storyapp.data.api.response.AllStoryResponse
+import com.belajar.storyapp.data.api.response.DetailResponse
+import com.belajar.storyapp.data.api.response.ListStoryItem
 import com.belajar.storyapp.data.api.response.LoginResponse
 import com.belajar.storyapp.data.api.response.RegisterResponse
 import com.belajar.storyapp.data.api.response.UploadResponse
@@ -18,6 +20,7 @@ import com.belajar.storyapp.data.model.DataModel
 import com.belajar.storyapp.helper.AuthPreference
 import com.belajar.storyapp.helper.Result
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -80,6 +83,23 @@ class StoryRepository private constructor(
         }
     }
 
+    fun getDetailStory(id: String): LiveData<Result<DetailResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val client = apiService.getDetailedStory(id)
+            if (client.error == false) {
+                emit(Result.Success(client))
+            } else {
+                emit(Result.Failure(client.message.toString()))
+            }
+
+        } catch (e: HttpException) {
+            Log.e("DetailStoriesHTTP", "${e.message}")
+            emit(Result.Failure(e.message.toString()))
+        }
+    }
+
+
     fun postStory(multipartBody: MultipartBody.Part, description: RequestBody): LiveData<Result<UploadResponse>> = liveData {
         emit(Result.Loading)
 
@@ -112,7 +132,6 @@ class StoryRepository private constructor(
             emit(Result.Failure(e.message.toString()))
         }
     }
-
     suspend fun saveData(dataModel: DataModel) {
         authPreference.saveData(dataModel)
     }
