@@ -20,7 +20,8 @@
         <activity
             android:name=".DetailActivity"
             android:exported="false"
-            android:theme="@style/Theme.StoryApp.ActionBar"/>
+            android:theme="@style/Theme.StoryApp.ActionBar"
+            android:parentActivityName=".HomepageActivity"/>
         <activity
             android:name=".CameraActivity"
             android:exported="false" />
@@ -38,7 +39,8 @@
             android:name=".StoryActivity"
             android:exported="false"
             android:theme="@style/Theme.StoryApp.ActionBar"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:parentActivityName=".HomepageActivity"/>
         <activity
             android:name=".HomepageActivity"
             android:exported="false"

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
+    card_view:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/avatar_detail"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/baseline_account_circle_24"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent" />
+
+
+        <TextView
+            android:id="@+id/item_detail_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            tools:text="@tools:sample/lorem"
+            android:layout_marginHorizontal="16dp"
+            card_view:layout_constraintStart_toEndOf="@+id/avatar_detail"
+            card_view:layout_constraintTop_toTopOf="@id/avatar_detail"/>
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/item_detail_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            tools:text="@tools:sample/lorem/random"
+            android:fontFamily="sans-serif-condensed-light"
+            android:maxLines="4"
+            android:justificationMode="inter_word"
+            android:lineSpacingExtra="1.5sp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            card_view:layout_constraintTop_toBottomOf="@id/item_detail_date"/>
+        <TextView
+            android:id="@+id/item_detail_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@tools:sample/lorem"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:layout_marginHorizontal="16dp"
+            card_view:layout_constraintTop_toBottomOf="@+id/item_detail_name"
+            card_view:layout_constraintStart_toEndOf="@+id/avatar_detail" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+
+

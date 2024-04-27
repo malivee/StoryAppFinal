@@ -1,5 +1,7 @@
 package com.belajar.storyapp
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.belajar.storyapp.databinding.ActivityDetailBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
+import com.belajar.storyapp.helper.toDateFormat
 import com.bumptech.glide.Glide
 
 class DetailActivity : AppCompatActivity() {
@@ -27,6 +30,15 @@ class DetailActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        supportActionBar?.apply {
+            title = null
+            setHomeButtonEnabled(true)
+            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
+//            setBackgroundDrawable(ColorDrawable(getColor(R.color.dark_blue)))
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+
+        }
         val viewModelFactory = ViewModelFactory.getInstance(this)
         val viewModel: DetailViewModel by viewModels { viewModelFactory }
 
@@ -40,13 +52,21 @@ class DetailActivity : AppCompatActivity() {
                         is Result.Failure -> Toast.makeText(this@DetailActivity, "Failed", Toast.LENGTH_SHORT).show()
                         Result.Loading -> {}
                         is Result.Success -> {
+                            binding.apply {
+
+                            }
                             Glide.with(this)
                                 .load(it.data.story?.photoUrl)
-                                .into(binding.imgPhoto)
-                            binding.itemName.text = it.data.story?.name
-                            binding.itemDesc.text = it.data.story?.description
+                                .into(binding.imgDetailPhoto)
+                            binding.apply {
+                                itemDetailName.text = it.data.story?.name
+                                itemDetailDesc.text = it.data.story?.description
+                                itemDetailDate.text = it.data.story?.createdAt?.toDateFormat()
 
-//                            Log.d("DESCDETAIL", it.data.listStory?.get(1)?.name.toString())
+
+                            }
+
+
                         }
                     }
                 }

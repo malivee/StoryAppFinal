@@ -53,12 +53,14 @@
         android:id="@+id/rv_story"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/btn_story"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_stories"/>
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_story"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/item_stories" />
 
 
 

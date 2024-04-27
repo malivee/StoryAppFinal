@@ -1,62 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    android:fillViewport="true">
 
-    <ImageView
-        android:id="@+id/img_photo"
-        android:layout_width="match_parent"
-        android:layout_height="181dp"
-        tools:src="@tools:sample/avatars"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-    <TextView
-        android:id="@+id/item_name"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="@tools:sample/lorem"
-        android:layout_marginTop="12dp"
-        android:layout_marginHorizontal="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_photo"/>
+        tools:context=".DetailActivity">
+
+        <ImageView
+            android:id="@+id/img_detail_logo"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/dicoding_svg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
-        android:id="@+id/item_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        tools:text="@tools:sample/lorem/random"
-        android:fontFamily="sans-serif-condensed-light"
-        android:maxLines="4"
-        android:justificationMode="inter_word"
-        android:lineSpacingExtra="1.5sp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@id/item_name"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <ImageView
+            android:id="@+id/img_detail_photo"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:layout_margin="16dp"
+            android:background="@color/dark_blue"
+            android:backgroundTint="@color/black"
+            android:foregroundGravity="top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_detail_desc"
+            tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/item_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/lorem"
-        android:textSize="11sp"
-        android:fontFamily="sans-serif-condensed-light"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/item_desc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/avatar_detail"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/baseline_account_circle_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_detail_logo" />
+
+
+        <TextView
+            android:id="@+id/item_detail_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/avatar_detail"
+            app:layout_constraintTop_toTopOf="@id/avatar_detail"
+            tools:text="@tools:sample/lorem" />
+
+
+        <TextView
+            android:id="@+id/item_detail_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif-condensed"
+            android:justificationMode="inter_word"
+            android:lineSpacingExtra="1.5sp"
+            android:maxLines="4"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/item_detail_date"
+            tools:text="@tools:sample/lorem/random" />
+
+        <TextView
+            android:id="@+id/item_detail_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textSize="11sp"
+            app:layout_constraintStart_toEndOf="@+id/avatar_detail"
+            app:layout_constraintTop_toBottomOf="@+id/item_detail_name"
+            tools:text="@tools:sample/lorem" />
+
+
+        <TextView
+            android:id="@+id/tv_cta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16sp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Interested to make your own story? Start now"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_cta"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_cta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:backgroundTint="@color/dark_blue"
+            android:drawableEnd="@drawable/baseline_add_circle_outline_24"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Create your story now!"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
