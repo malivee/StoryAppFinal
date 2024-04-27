@@ -53,18 +53,21 @@ class HomepageActivity : AppCompatActivity() {
         binding.rvStory.adapter = adapter
         binding.rvStory.layoutManager = layoutManager
 
-        val token = intent.getStringExtra(LoginActivity.EXTRA_RESULT)
+//        val token = intent.getStringExtra(LoginActivity.EXTRA_RESULT)
+        val token = viewModel.getLoginData().observe(this) {
+            it.token
+        }
+        val tokenGet = token.toString()
         val tokenFromMain = intent.getStringExtra(MainActivity.EXTRA_TOKEN)
         val name = intent.getStringExtra(LoginActivity.EXTRA_NAME)
         val nameMain = intent.getStringExtra(MainActivity.EXTRA_NAME_MAIN)
-        Log.i("TOKENHOME", token.toString())
         Log.i("TOKENHOME", tokenFromMain.toString())
 
+        viewModel.getLoginData().observe(this) {
+            val itToken = it.token
+            Log.i("TOKENHOMEIT", itToken.toString())
 
-        val viewDebug = (token ?: tokenFromMain)?.let {
-            viewModel.getStories(
-                it
-            ).observe(this) {
+            viewModel.getStories().observe(this) {
                 if (it != null) {
                     when (it) {
                         is Result.Failure -> Toast.makeText(this@HomepageActivity, it.error, Toast.LENGTH_SHORT).show()
@@ -78,8 +81,9 @@ class HomepageActivity : AppCompatActivity() {
                     }
                 }
             }
+
         }
-        Log.d("ViewDebug","$viewDebug.")
+//        Log.d("ViewDebug","$viewDebug.")
 
         viewModel.getLoginData().observe(this) {
             val loginState = it.isLogin
@@ -93,7 +97,7 @@ class HomepageActivity : AppCompatActivity() {
         binding.btnStory.setOnClickListener {
             val intent = Intent(this@HomepageActivity, StoryActivity::class.java)
             intent.putExtra(EXTRA_NAME, name ?: nameMain)
-            intent.putExtra(EXTRA_TOKEN, token ?: tokenFromMain)
+//            intent.putExtra(EXTRA_TOKEN, token ?: tokenFromMain)
             startActivity(intent)
         }
 

@@ -63,11 +63,11 @@ class StoryRepository private constructor(
         }
     }
 
-    fun getStories(token: String): LiveData<Result<AllStoryResponse>> = liveData {
+    fun getStories(): LiveData<Result<AllStoryResponse>> = liveData {
         emit(Result.Loading)
 
         try {
-            val client = ApiConfig.getApiService(token).getStories()
+            val client = apiService.getStories()
             if (client.error == false) {
                 emit(Result.Success(client))
             } else {
@@ -85,7 +85,7 @@ class StoryRepository private constructor(
 
 
         try {
-            val client = ApiConfig.getApiService(token).postStory(multipartBody, description)
+            val client = ApiConfig.getApiService(authPreference).postStory(multipartBody, description)
             if (client.error == false) {
                 emit(Result.Success(client))
             } else {
@@ -107,6 +107,10 @@ class StoryRepository private constructor(
 
     suspend fun logout() {
         authPreference.logout()
+    }
+
+    suspend fun getToken() {
+
     }
 
     companion object {

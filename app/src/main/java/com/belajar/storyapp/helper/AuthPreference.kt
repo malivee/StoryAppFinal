@@ -53,6 +53,13 @@ class AuthPreference private constructor(
         }
     }
 
+    suspend fun getToken(): Flow<String?> {
+        return dataStore.data.map {
+
+            it[TOKEN]
+
+        }
+    }
     companion object {
         @Volatile
         private var INSTANCE: AuthPreference? = null

@@ -11,7 +11,7 @@ import com.belajar.storyapp.helper.Result
 import kotlinx.coroutines.launch
 
 class HomepageViewModel(private val storyRepository: StoryRepository): ViewModel() {
-    fun getStories(token: String): LiveData<Result<AllStoryResponse>> = storyRepository.getStories(token)
+    fun getStories(): LiveData<Result<AllStoryResponse>> = storyRepository.getStories()
 
     fun getLoginData(): LiveData<DataModel> {
         return storyRepository.getData().asLiveData()
@@ -22,4 +22,5 @@ class HomepageViewModel(private val storyRepository: StoryRepository): ViewModel
             storyRepository.logout()
         }
     }
+
 }

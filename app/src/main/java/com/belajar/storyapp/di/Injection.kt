@@ -15,8 +15,8 @@ object Injection {
 //        val intent = Intent()
 //        val token = intent.getStringExtra(LoginActivity.EXTRA_RESULT)
 //        Log.i("TOKEN", "token: $token")
-        val apiService = ApiConfig.getApiService()
         val authPreference = AuthPreference.getInstance(context.dataStore)
+        val apiService = ApiConfig.getApiService(authPreference)
         return StoryRepository.getInstance(apiService, authPreference)
     }
 }
