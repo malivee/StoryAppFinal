@@ -75,7 +75,7 @@ class StoryRepository private constructor(
                 emit(Result.Failure(client.message.toString()))
             }
         } catch (e: HttpException) {
-            Log.e("PostLoginHTTP", "${e.message}")
+            Log.e("GetStoriesHTTP", "${e.message}")
             emit(Result.Failure(e.message.toString()))
         }
     }
@@ -125,9 +125,6 @@ class StoryRepository private constructor(
         authPreference.logout()
     }
 
-    suspend fun getToken() {
-
-    }
 
     companion object {
         private var instance: StoryRepository? = null

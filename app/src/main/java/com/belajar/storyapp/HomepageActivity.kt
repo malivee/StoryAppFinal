@@ -54,18 +54,16 @@ class HomepageActivity : AppCompatActivity() {
         binding.rvStory.layoutManager = layoutManager
 
 //        val token = intent.getStringExtra(LoginActivity.EXTRA_RESULT)
-        val token = viewModel.getLoginData().observe(this) {
-            it.token
-        }
-        val tokenGet = token.toString()
-        val tokenFromMain = intent.getStringExtra(MainActivity.EXTRA_TOKEN)
-        val name = intent.getStringExtra(LoginActivity.EXTRA_NAME)
-        val nameMain = intent.getStringExtra(MainActivity.EXTRA_NAME_MAIN)
-        Log.i("TOKENHOME", tokenFromMain.toString())
+//        val token = viewModel.getLoginData().observe(this) {
+//            it.token
+//        }
+//        val tokenGet = token.toString()
+//        val tokenFromMain = intent.getStringExtra(MainActivity.EXTRA_TOKEN)
+//        val name = intent.getStringExtra(LoginActivity.EXTRA_NAME)
+//        val nameMain = intent.getStringExtra(MainActivity.EXTRA_NAME_MAIN)
+//        Log.i("TOKENHOME", tokenFromMain.toString())
 
-        viewModel.getLoginData().observe(this) {
-            val itToken = it.token
-            Log.i("TOKENHOMEIT", itToken.toString())
+
 
             viewModel.getStories().observe(this) {
                 if (it != null) {
@@ -78,7 +76,7 @@ class HomepageActivity : AppCompatActivity() {
 
                             }
                         }
-                    }
+
                 }
             }
 
@@ -113,6 +111,7 @@ class HomepageActivity : AppCompatActivity() {
             viewModel.logout()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
 
         }
         return super.onOptionsItemSelected(item)

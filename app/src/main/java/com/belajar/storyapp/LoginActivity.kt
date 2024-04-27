@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 if (it != null) {
                     when (it) {
                         is Result.Failure -> {
-                            Toast.makeText(this@LoginActivity, it.error, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@LoginActivity, "Please login to your account", Toast.LENGTH_SHORT).show()
                         }
                         Result.Loading -> {}
                         is Result.Success -> {
@@ -72,6 +72,7 @@ class LoginActivity : AppCompatActivity() {
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                             Log.i("TOKEN", token)
                             startActivity(intent)
+                            finish()
 
                         }
                     }
