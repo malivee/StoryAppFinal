@@ -40,4 +40,11 @@ interface ApiService {
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody
     ): UploadResponse
+
+    @Multipart
+    @POST("stories/guest")
+    suspend fun postStoryGuest(
+        @Part file: MultipartBody.Part,
+        @Part("description") description: RequestBody
+    ): UploadResponse
 }

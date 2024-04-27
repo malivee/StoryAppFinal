@@ -86,7 +86,13 @@ class StoryActivity : AppCompatActivity() {
         }
 
         binding.btnSubmit.setOnClickListener {
-            postStory()
+            viewModel.getLoginData().observe(this) {
+                if (it.isLogin) {
+                    postStory()
+                } else {
+                    postStoryGuest()
+                }
+            }
         }
 
 
@@ -97,8 +103,69 @@ class StoryActivity : AppCompatActivity() {
             val imageFile = it?.let { uri -> uriToFile(uri, this@StoryActivity) }
             val description = binding.edInput.text.toString()
 
-            val name = intent.getStringExtra(HomepageActivity.EXTRA_NAME).toString()
-            val token = intent.getStringExtra(HomepageActivity.EXTRA_TOKEN).toString()
+//            val name = intent.getStringExtra(HomepageActivity.EXTRA_NAME).toString()
+//            val token = intent.getStringExtra(HomepageActivity.EXTRA_TOKEN).toString()
+
+            val requestBody = description.toRequestBody("text/plain".toMediaType())
+            val requestImageFile = imageFile?.asRequestBody("image/jpeg".toMediaType())
+
+            val multipartBody = requestImageFile?.let { imageFile ->
+                MultipartBody.Part.createFormData(
+                    "photo",
+                    description,
+                    imageFile
+                )
+            }
+
+            if (multipartBody != null) {
+                viewModel.postStory(multipartBody, requestBody).observe(this) {
+                    if (it != null) {
+                        when (it) {
+                            is Result.Failure -> Toast.makeText(
+                                this@StoryActivity,
+                                it.error,
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            Result.Loading -> {}
+                            is Result.Success -> {
+//                                    if (token == null) {
+//                                        val intent =
+//                                            Intent(this@StoryActivity, MainActivity::class.java)
+//                                        startActivity(intent)
+//                                        Toast.makeText(
+//                                            this@StoryActivity,
+//                                            it.data.message,
+//                                            Toast.LENGTH_SHORT
+//                                        ).show()
+//                                    } else {
+                                Toast.makeText(
+                                    this@StoryActivity,
+                                    it.data.message,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                val intent = Intent(this, HomepageActivity::class.java)
+                                startActivity(intent)
+                                finish()
+//                                    }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+        }
+    }
+
+
+    private fun postStoryGuest() {
+        currentImageUri?.let {
+            val imageFile = it?.let { uri -> uriToFile(uri, this@StoryActivity) }
+            val description = binding.edInput.text.toString()
+
+//            val name = intent.getStringExtra(HomepageActivity.EXTRA_NAME).toString()
+//            val token = intent.getStringExtra(HomepageActivity.EXTRA_TOKEN).toString()
 
             val requestBody = description.toRequestBody("text/plain".toMediaType())
             val requestImageFile = imageFile?.asRequestBody("image/jpeg".toMediaType())
@@ -111,26 +178,31 @@ class StoryActivity : AppCompatActivity() {
                 )
             }
             if (multipartBody != null) {
-                viewModel.postStory(token, multipartBody, requestBody).observe(this) {
+                viewModel.postStoryGuest(multipartBody, requestBody).observe(this@StoryActivity) {
                     if (it != null) {
                         when (it) {
-                            is Result.Failure -> Toast.makeText(this@StoryActivity, it.error, Toast.LENGTH_SHORT).show()
+                            is Result.Failure -> Toast.makeText(
+                                this@StoryActivity,
+                                it.error,
+                                Toast.LENGTH_SHORT
+                            ).show()
+
                             Result.Loading -> {}
                             is Result.Success -> {
-                                if (token == null) {
-                                    val intent = Intent(this@StoryActivity, MainActivity::class.java)
-                                    startActivity(intent)
-                                    Toast.makeText(this@StoryActivity, it.data.message, Toast.LENGTH_SHORT).show()
-                                } else {
-                                    Toast.makeText(this@StoryActivity, it.data.message, Toast.LENGTH_SHORT).show()
-                                }
+                                val intent =
+                                    Intent(this@StoryActivity, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                                Toast.makeText(
+                                    this@StoryActivity,
+                                    it.data.message,
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     }
                 }
             }
-
-
         }
     }
 
@@ -150,7 +222,6 @@ class StoryActivity : AppCompatActivity() {
     }
 
 
-
     private val cameraXLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -162,7 +233,7 @@ class StoryActivity : AppCompatActivity() {
 
     private val galleryLauncher = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
-    ){
+    ) {
         it?.let {
             currentImageUri = it
             showImage()
@@ -182,8 +253,6 @@ class StoryActivity : AppCompatActivity() {
         cropImageLauncher.launch(intent)
         return intent
     }
-
-
 
 
     private val cropImageLauncher = registerForActivityResult(
@@ -213,8 +282,6 @@ class StoryActivity : AppCompatActivity() {
             Log.d("ImageUri", "showImage: $it")
         }
     }
-
-
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -60,6 +60,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.btnGuest.setOnClickListener {
+            val intent = Intent(this@MainActivity, StoryActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
     }

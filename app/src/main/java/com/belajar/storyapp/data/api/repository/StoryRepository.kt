@@ -80,12 +80,28 @@ class StoryRepository private constructor(
         }
     }
 
-    fun postStory(token: String, multipartBody: MultipartBody.Part, description: RequestBody): LiveData<Result<UploadResponse>> = liveData {
+    fun postStory(multipartBody: MultipartBody.Part, description: RequestBody): LiveData<Result<UploadResponse>> = liveData {
         emit(Result.Loading)
 
 
         try {
-            val client = ApiConfig.getApiService(authPreference).postStory(multipartBody, description)
+            val client = apiService.postStory(multipartBody, description)
+            if (client.error == false) {
+                emit(Result.Success(client))
+            } else {
+                emit(Result.Failure(client.message.toString()))
+            }
+        } catch (e: HttpException) {
+            Log.e("PostLoginHTTP", "${e.message}")
+            emit(Result.Failure(e.message.toString()))
+        }
+    }
+
+    fun postStoryGuest(multipartBody: MultipartBody.Part, description: RequestBody): LiveData<Result<UploadResponse>> = liveData {
+        emit(Result.Loading)
+
+        try {
+            val client = apiService.postStoryGuest(multipartBody, description)
             if (client.error == false) {
                 emit(Result.Success(client))
             } else {

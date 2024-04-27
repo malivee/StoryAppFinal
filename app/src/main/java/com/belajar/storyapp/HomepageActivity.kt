@@ -96,7 +96,7 @@ class HomepageActivity : AppCompatActivity() {
 
         binding.btnStory.setOnClickListener {
             val intent = Intent(this@HomepageActivity, StoryActivity::class.java)
-            intent.putExtra(EXTRA_NAME, name ?: nameMain)
+//            intent.putExtra(EXTRA_NAME, name ?: nameMain)
 //            intent.putExtra(EXTRA_TOKEN, token ?: tokenFromMain)
             startActivity(intent)
         }
@@ -118,9 +118,9 @@ class HomepageActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    companion object {
-        const val EXTRA_NAME = "name_extra"
-        const val EXTRA_TOKEN = "token_extra"
-    }
+//    companion object {
+//        const val EXTRA_NAME = "name_extra"
+//        const val EXTRA_TOKEN = "token_extra"
+//    }
 
 }
