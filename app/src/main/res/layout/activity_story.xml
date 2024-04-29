@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main"
     tools:context=".StoryActivity">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
+    android:id="@+id/main"
     android:layout_height="0dp">
 
     <ImageView
@@ -23,6 +23,7 @@
 
     <ImageView
         android:id="@+id/img_story_photo"
+        android:transitionName="logo"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginHorizontal="16dp"
@@ -39,7 +40,7 @@
         android:layout_height="75dp"
         android:backgroundTint="@color/dark_blue"
         android:drawableEnd="@drawable/baseline_insert_photo_24"
-        android:text="Gallery"
+        android:text="@string/gallery"
         android:padding="8dp"
         android:textColor="@color/white"
         android:layout_marginEnd="16dp"
@@ -52,7 +53,7 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:drawableEnd="@drawable/baseline_camera_alt_24"
-        android:text="CameraX"
+        android:text="@string/camerax"
         android:textAllCaps="false"
         android:padding="8dp"
         android:layout_marginStart="16dp"
@@ -81,6 +82,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_input"
+                android:transitionName="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
@@ -102,6 +104,7 @@
 
     <Button
         android:id="@+id/btn_submit"
+        android:transitionName="submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/submit"
@@ -110,6 +113,14 @@
         android:layout_marginHorizontal="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

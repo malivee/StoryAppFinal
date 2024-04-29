@@ -20,13 +20,16 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.belajar.storyapp.databinding.ActivityStoryBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
+import com.belajar.storyapp.helper.reduceFileImage
 import com.belajar.storyapp.helper.uriToFile
 import com.yalantis.ucrop.UCrop
 import okhttp3.MediaType.Companion.toMediaType
@@ -39,8 +42,8 @@ class StoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoryBinding
     private var currentImageUri: Uri? = null
 
-    val viewModelFactory = ViewModelFactory.getInstance(this@StoryActivity)
-    val viewModel: StoryViewModel by viewModels { viewModelFactory }
+    private val viewModelFactory = ViewModelFactory.getInstance(this@StoryActivity)
+    private val viewModel: StoryViewModel by viewModels { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,12 +98,12 @@ class StoryActivity : AppCompatActivity() {
             }
         }
 
-
     }
+
 
     private fun postStory() {
         currentImageUri.let {
-            val imageFile = it?.let { uri -> uriToFile(uri, this@StoryActivity) }
+            val imageFile = it?.let { uri -> uriToFile(uri, this@StoryActivity).reduceFileImage() }
             val description = binding.edInput.text.toString()
 
 //            val name = intent.getStringExtra(HomepageActivity.EXTRA_NAME).toString()
@@ -123,7 +126,7 @@ class StoryActivity : AppCompatActivity() {
                         when (it) {
                             is Result.Failure -> Toast.makeText(
                                 this@StoryActivity,
-                                it.error,
+                                getString(R.string.error_post_story),
                                 Toast.LENGTH_SHORT
                             ).show()
 
@@ -145,7 +148,13 @@ class StoryActivity : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 val intent = Intent(this, HomepageActivity::class.java)
-                                startActivity(intent)
+                                val optionsCompat : ActivityOptionsCompat =
+                                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                        this@StoryActivity,
+                                        Pair(binding.imgStoryPhoto, "logo"),
+                                        Pair(binding.edInput, "text")
+                                    )
+                                startActivity(intent, optionsCompat.toBundle())
                                 finish()
 //                                    }
                             }
@@ -183,7 +192,7 @@ class StoryActivity : AppCompatActivity() {
                         when (it) {
                             is Result.Failure -> Toast.makeText(
                                 this@StoryActivity,
-                                it.error,
+                                getString(R.string.error_post_story),
                                 Toast.LENGTH_SHORT
                             ).show()
 
@@ -191,7 +200,12 @@ class StoryActivity : AppCompatActivity() {
                             is Result.Success -> {
                                 val intent =
                                     Intent(this@StoryActivity, MainActivity::class.java)
-                                startActivity(intent)
+                                val optionsCompat : ActivityOptionsCompat =
+                                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                        this@StoryActivity,
+                                        Pair(binding.imgStoryPhoto, "logo")
+                                    )
+                                startActivity(intent, optionsCompat.toBundle())
                                 finish()
                                 Toast.makeText(
                                     this@StoryActivity,
@@ -215,9 +229,9 @@ class StoryActivity : AppCompatActivity() {
         ActivityResultContracts.RequestPermission()
     ) {
         if (it) {
-            Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.permission_granted), Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.permission_denied), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -284,17 +298,39 @@ class StoryActivity : AppCompatActivity() {
     }
 
 
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.option_menu, menu)
+//
+////        val settingItem = menu?.findItem(R.id.btn_setting)
+////        settingItem?.icon?.setTint(ContextCompat.getColor(this, R.color.white))
+//
+//        return super.onCreateOptionsMenu(menu)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if (item.itemId == R.id.btn_setting) {
+//
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.option_menu, menu)
-
-//        val settingItem = menu?.findItem(R.id.btn_setting)
-//        settingItem?.icon?.setTint(ContextCompat.getColor(this, R.color.white))
-
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.btn_setting) {
+            val intent = Intent(this, SettingActivity::class.java)
+            val optionsCompat: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@StoryActivity,
+                    Pair(binding.edInput, "name"),
+                    Pair(binding.imgStoryPhoto, "logo"),
+                    Pair(binding.btnSubmit, "logout")
+                )
+            startActivity(intent, optionsCompat.toBundle())
+//            finish()
 
         }
         return super.onOptionsItemSelected(item)

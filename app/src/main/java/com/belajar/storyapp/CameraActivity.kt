@@ -135,7 +135,8 @@ class CameraActivity : AppCompatActivity() {
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    Toast.makeText(this@CameraActivity, "Failed to capture image", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@CameraActivity,
+                        getString(R.string.camera_capture_error), Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -158,7 +159,6 @@ class CameraActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TAG = "CameraActivity"
         const val EXTRA_URI = "extra_uri"
         const val EXTRA_RESULT = 101
     }

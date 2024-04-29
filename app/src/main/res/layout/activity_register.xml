@@ -9,6 +9,7 @@
 
     <ImageView
         android:id="@+id/img_logo"
+        android:transitionName="logo"
         android:layout_width="0dp"
         android:layout_height="72dp"
         android:src="@drawable/dicoding_svg"
@@ -20,9 +21,10 @@
 
     <TextView
         android:id="@+id/tv_reg_title"
+        android:transitionName="title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please input your data to register"
+        android:text="@string/register_title"
         android:fontFamily="sans-serif-condensed"
         android:layout_margin="16dp"
         android:textSize="16sp"
@@ -33,9 +35,10 @@
 
     <TextView
         android:id="@+id/tv_reg_desc"
+        android:transitionName="description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register your account"
+        android:text="@string/register_subtitle"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="4dp"
@@ -49,7 +52,7 @@
         android:id="@+id/tv_reg_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name"
+        android:text="@string/name"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
@@ -78,9 +81,10 @@
 
     <TextView
         android:id="@+id/tv_reg_email"
+        android:transitionName="email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="E-mail"
+        android:text="@string/email"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
@@ -92,6 +96,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ed_reg_email"
+        android:transitionName="email2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -109,9 +114,10 @@
 
     <TextView
         android:id="@+id/tv_reg_password"
+        android:transitionName="password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Password"
+        android:text="@string/password"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
@@ -123,6 +129,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ed_reg_password"
+        android:transitionName="password2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -139,9 +146,24 @@
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/error_register"
+        android:textColor="@color/red"
+        android:textSize="11sp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/ed_reg_password"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <Button
         android:id="@+id/btn_reg_register"
+        android:transitionName="register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -188,6 +210,7 @@
 
     <com.belajar.storyapp.customview.ButtonOutline
         android:id="@+id/btn_reg_guest"
+        android:transitionName="guest"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:drawableStart="@drawable/baseline_person_24"
@@ -202,18 +225,20 @@
 
     <TextView
         android:id="@+id/tv_login_here"
+        android:transitionName="account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="24dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:textSize="12sp"
-        android:text="@string/no_account"
+        android:text="@string/have_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
         android:id="@+id/btn_login_here"
+        android:transitionName="account2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="-16dp"
@@ -221,9 +246,17 @@
         android:fontFamily="sans-serif-condensed-medium"
         android:textSize="12sp"
         android:background="@android:color/transparent"
-        android:text="@string/register_here"
+        android:text="@string/login_here"
         app:layout_constraintBottom_toBottomOf="@id/tv_login_here"
         app:layout_constraintTop_toTopOf="@+id/tv_login_here"
         app:layout_constraintStart_toEndOf="@+id/tv_login_here"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

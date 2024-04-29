@@ -1,8 +1,11 @@
 package com.belajar.storyapp
 
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
 import com.belajar.storyapp.data.api.response.ListStoryItem
 import com.belajar.storyapp.databinding.ItemStoriesBinding
@@ -23,7 +26,16 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {
             binding.cardView.setOnClickListener {
                 val intent = Intent(binding.root.context, DetailActivity::class.java)
                 intent.putExtra(DetailActivity.EXTRA_ID, story.id)
-                binding.root.context.startActivity(intent)
+
+                val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        binding.root.context as Activity,
+                        Pair(binding.imgPhoto, "profile"),
+                        Pair(binding.itemName, "name"),
+                        Pair(binding.itemDesc, "description"),
+                        Pair(binding.itemDate, "date")
+                    )
+                binding.root.context.startActivity(intent, optionsCompat.toBundle())
             }
         }
 

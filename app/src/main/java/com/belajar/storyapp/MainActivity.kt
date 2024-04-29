@@ -1,12 +1,15 @@
 package com.belajar.storyapp
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.belajar.storyapp.databinding.ActivityMainBinding
@@ -42,35 +45,56 @@ class MainActivity : AppCompatActivity() {
 
             if (it.isLogin) {
                 val intent = Intent(this@MainActivity, HomepageActivity::class.java)
-                intent.putExtra(EXTRA_TOKEN, token)
-                intent.putExtra(EXTRA_NAME_MAIN, name)
-                Log.d("TOKENMAIN", token.toString())
-                startActivity(intent)
+                val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        this@MainActivity,
+                        Pair(binding.imgLogo, "logo")
+                    )
+
+                startActivity(intent, optionsCompat.toBundle())
                 finish()
             }
         }
 
         binding.btnLogin.setOnClickListener {
             val intent = Intent(this@MainActivity, LoginActivity::class.java)
-            startActivity(intent)
+            val optionsCompat: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@MainActivity,
+                    Pair(binding.imgLogo, "logo"),
+                    Pair(binding.btnLogin, "login"),
+                    Pair(binding.btnGuest, "guest")
+                )
+            startActivity(intent, optionsCompat.toBundle())
         }
 
         binding.btnRegister.setOnClickListener {
             val intent = Intent(this@MainActivity, RegisterActivity::class.java)
-            startActivity(intent)
+            val optionsCompat: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@MainActivity,
+                    Pair(binding.imgLogo, "logo"),
+                    Pair(binding.btnRegister, "register"),
+                    Pair(binding.btnGuest, "guest")
+                )
+            startActivity(intent, optionsCompat.toBundle())
         }
 
         binding.btnGuest.setOnClickListener {
             val intent = Intent(this@MainActivity, StoryActivity::class.java)
-            startActivity(intent)
+            val optionsCompat: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@MainActivity,
+                    Pair(binding.imgLogo, "logo"),
+                    Pair(binding.tvDescription1, "text"),
+                    Pair(binding.btnGuest, "submit")
+                )
+            startActivity(intent, optionsCompat.toBundle())
         }
 
 
 
     }
 
-    companion object {
-        const val EXTRA_TOKEN = "extra_token"
-        const val EXTRA_NAME_MAIN = "extra_name_main"
-    }
+
 }

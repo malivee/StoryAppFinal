@@ -9,7 +9,7 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="or">or</string>
-    <string name="guest">Login as a Guest</string>
+    <string name="guest">Posting as a Guest</string>
 
 
     <string name="error_password">Password must be more than 8 characters</string>
@@ -27,4 +27,25 @@
 
 
     <string name="error_open_camera">Error opening the camera</string>
+    <string name="login_title">Please enter your E-mail and Password</string>
+    <string name="login_subtitle">Login to your account</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="register_title">Please input your data to register</string>
+    <string name="register_subtitle">Register your account</string>
+    <string name="name">Name</string>
+    <string name="have_account">Have an account already?</string>
+    <string name="login_here">Login here</string>
+    <string name="gallery">Gallery</string>
+    <string name="camerax">CameraX</string>
+    <string name="language">Change your language</string>
+    <string name="logout">Logout</string>
+    <string name="camera_capture_error">Failed to capture image</string>
+    <string name="error_login">Wrong email or password</string>
+    <string name="error_register">Email already registered</string>
+    <string name="register_success">Register Success, please login to your account</string>
+    <string name="error_get_story">Error fetching the data, please try again</string>
+    <string name="permission_granted">Permission Granted</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="error_post_story">Something went wrong, please try again</string>
 </resources>

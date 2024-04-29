@@ -1,5 +1,6 @@
 package com.belajar.storyapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -8,6 +9,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,7 +52,12 @@ class DetailActivity : AppCompatActivity() {
             viewModel.getDetailStory(id).observe(this) {
                 if (it != null) {
                     when (it) {
-                        is Result.Failure -> Toast.makeText(this@DetailActivity, "Failed", Toast.LENGTH_SHORT).show()
+                        is Result.Failure -> Toast.makeText(
+                            this@DetailActivity,
+                            "Failed",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
                         Result.Loading -> {}
                         is Result.Success -> {
                             binding.apply {
@@ -62,18 +70,24 @@ class DetailActivity : AppCompatActivity() {
                                 itemDetailName.text = it.data.story?.name
                                 itemDetailDesc.text = it.data.story?.description
                                 itemDetailDate.text = it.data.story?.createdAt?.toDateFormat()
-
-
                             }
-
-
                         }
                     }
                 }
             }
         }
 
-
+        binding.btnCta.setOnClickListener {
+            val intent = Intent(this, StoryActivity::class.java)
+            val optionsCompat: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@DetailActivity,
+                    Pair(binding.imgDetailLogo, "logo"),
+                    Pair(binding.itemDetailDesc, "text"),
+                    Pair(binding.btnCta, "submit")
+                )
+            startActivity(intent, optionsCompat.toBundle())
+        }
     }
 
     companion object {

@@ -63,6 +63,8 @@ class StoryRepository private constructor(
         } catch (e: HttpException) {
             Log.e("PostLoginHTTP", "${e.message}")
             emit(Result.Failure(e.message.toString()))
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -80,6 +82,8 @@ class StoryRepository private constructor(
         } catch (e: HttpException) {
             Log.e("GetStoriesHTTP", "${e.message}")
             emit(Result.Failure(e.message.toString()))
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -96,6 +100,8 @@ class StoryRepository private constructor(
         } catch (e: HttpException) {
             Log.e("DetailStoriesHTTP", "${e.message}")
             emit(Result.Failure(e.message.toString()))
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -112,8 +118,10 @@ class StoryRepository private constructor(
                 emit(Result.Failure(client.message.toString()))
             }
         } catch (e: HttpException) {
-            Log.e("PostLoginHTTP", "${e.message}")
+            Log.e("PostStoryHTTP", "${e.message}")
             emit(Result.Failure(e.message.toString()))
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -128,8 +136,10 @@ class StoryRepository private constructor(
                 emit(Result.Failure(client.message.toString()))
             }
         } catch (e: HttpException) {
-            Log.e("PostLoginHTTP", "${e.message}")
+            Log.e("PostStoryGuestHTTP", "${e.message}")
             emit(Result.Failure(e.message.toString()))
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
     suspend fun saveData(dataModel: DataModel) {

@@ -6,11 +6,15 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat
+import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.belajar.storyapp.data.model.DataModel
@@ -36,17 +40,45 @@ class LoginActivity : AppCompatActivity() {
 
         setupInputListener()
 
+        buttonDisabled()
+
         val viewModelFactory = ViewModelFactory.getInstance(this@LoginActivity)
         val viewModel: LoginViewModel by viewModels { viewModelFactory }
 
-        binding.root.setOnClickListener {
+        binding.main.setOnClickListener {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(it.windowToken, 0)
         }
 
         binding.btnRegisterHere.setOnClickListener {
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-            startActivity(intent)
+            val optionsCompact: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@LoginActivity,
+                    Pair(binding.btnLogLogin, "login"),
+                    Pair(binding.btnGuest, "guest"),
+                    Pair(binding.tvLogTitle, "title"),
+                    Pair(binding.tvLogDesc, "description"),
+                    Pair(binding.tvLogEmail, "email"),
+                    Pair(binding.edEmail, "email2"),
+                    Pair(binding.tvLogPassword, "password"),
+                    Pair(binding.edPassword, "password2"),
+                    Pair(binding.tvRegisterHere, "account1"),
+                    Pair(binding.btnRegisterHere, "account2")
+                )
+            startActivity(intent, optionsCompact.toBundle())
+        }
+
+        binding.btnGuest.setOnClickListener {
+            val intent = Intent(this@LoginActivity, StoryActivity::class.java)
+            val optionsCompat: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@LoginActivity,
+                    Pair(binding.imgLogo, "logo"),
+                    Pair(binding.edPassword, "text"),
+                    Pair(binding.btnGuest, "submit")
+                )
+            startActivity(intent, optionsCompat.toBundle())
         }
 
         binding.btnLogLogin.setOnClickListener {
@@ -56,7 +88,10 @@ class LoginActivity : AppCompatActivity() {
                 if (it != null) {
                     when (it) {
                         is Result.Failure -> {
-                            Toast.makeText(this@LoginActivity, "Please login to your account", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(this@LoginActivity, "Please enter a correct email or password", Toast.LENGTH_SHORT).show()
+                            binding.emailEditLog.setBackgroundResource(R.drawable.text_edit_error)
+                            binding.passwordEditLog.setBackgroundResource(R.drawable.text_edit_error)
+                            binding.tvError.visibility = View.VISIBLE
                         }
                         Result.Loading -> {}
                         is Result.Success -> {
@@ -67,11 +102,15 @@ class LoginActivity : AppCompatActivity() {
                                 token
                             ))
                             val intent = Intent(this@LoginActivity, HomepageActivity::class.java)
-                            intent.putExtra(EXTRA_RESULT, it.data.loginResult?.token.toString())
-                            intent.putExtra(EXTRA_NAME, it.data.loginResult?.token.toString())
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                             Log.i("TOKEN", token)
-                            startActivity(intent)
+                            val optionsCompat: ActivityOptionsCompat =
+                                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                    this@LoginActivity,
+                                    Pair(binding.imgLogo, "logo")
+                                )
+
+                            startActivity(intent, optionsCompat.toBundle())
                             finish()
 
                         }
@@ -96,6 +135,7 @@ class LoginActivity : AppCompatActivity() {
         } else {
             binding.btnLogLogin.isEnabled = false
             binding.btnLogLogin.setBackgroundColor(getColor(R.color.dark_blue_disabled))
+            binding.btnLogLogin.setTextColor(getColor(R.color.white))
             return
         }
     }
@@ -117,8 +157,4 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    companion object {
-        const val EXTRA_RESULT = "extra_result"
-        const val EXTRA_NAME = "extra_name"
-    }
 }

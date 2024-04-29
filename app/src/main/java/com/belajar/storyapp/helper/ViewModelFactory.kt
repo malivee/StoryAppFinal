@@ -8,6 +8,7 @@ import com.belajar.storyapp.HomepageViewModel
 import com.belajar.storyapp.LoginViewModel
 import com.belajar.storyapp.MainViewModel
 import com.belajar.storyapp.RegisterViewModel
+import com.belajar.storyapp.SettingViewModel
 import com.belajar.storyapp.StoryViewModel
 import com.belajar.storyapp.data.api.repository.StoryRepository
 import com.belajar.storyapp.di.Injection
@@ -33,6 +34,9 @@ class ViewModelFactory(private val storyRepository: StoryRepository): ViewModelP
         }
         if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
             return DetailViewModel(storyRepository) as T
+        }
+        if (modelClass.isAssignableFrom(SettingViewModel::class.java)) {
+            return SettingViewModel(storyRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModal class: ${modelClass.name}")
 

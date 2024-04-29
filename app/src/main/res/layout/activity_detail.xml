@@ -9,8 +9,6 @@
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".DetailActivity">
@@ -29,8 +27,9 @@
 
         <ImageView
             android:id="@+id/img_detail_photo"
+            android:transitionName="profile"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="500dp"
             android:layout_margin="16dp"
             android:background="@color/dark_blue"
             android:backgroundTint="@color/black"
@@ -55,6 +54,7 @@
 
         <TextView
             android:id="@+id/item_detail_name"
+            android:transitionName="name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -69,6 +69,7 @@
 
         <TextView
             android:id="@+id/item_detail_desc"
+            android:transitionName="description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -84,6 +85,7 @@
 
         <TextView
             android:id="@+id/item_detail_date"
+            android:transitionName="date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -100,13 +102,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16sp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
             android:text="Interested to make your own story? Start now"
             android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_cta"
+            app:layout_constraintTop_toBottomOf="@+id/img_detail_photo"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
@@ -119,9 +121,17 @@
             android:fontFamily="sans-serif-condensed"
             android:text="Create your story now!"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cta"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

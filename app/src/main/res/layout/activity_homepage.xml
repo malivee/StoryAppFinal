@@ -9,6 +9,7 @@
 
     <ImageView
         android:id="@+id/img_logo"
+        android:transitionName="logo"
         android:layout_width="0dp"
         android:layout_height="72dp"
         android:src="@drawable/dicoding_svg"
@@ -32,6 +33,7 @@
 
     <com.belajar.storyapp.customview.ButtonOutline
         android:id="@+id/btn_story"
+        android:transitionName="text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/story"
@@ -61,6 +63,14 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_story"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_stories" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 

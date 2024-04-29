@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,7 +71,7 @@ class HomepageActivity : AppCompatActivity() {
                 when (it) {
                     is Result.Failure -> Toast.makeText(
                         this@HomepageActivity,
-                        it.error,
+                        getString(R.string.error_get_story),
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -98,9 +100,13 @@ class HomepageActivity : AppCompatActivity() {
 
         binding.btnStory.setOnClickListener {
             val intent = Intent(this@HomepageActivity, StoryActivity::class.java)
-//            intent.putExtra(EXTRA_NAME, name ?: nameMain)
-//            intent.putExtra(EXTRA_TOKEN, token ?: tokenFromMain)
-            startActivity(intent)
+            val optionsCompact: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@HomepageActivity,
+                    Pair(binding.btnStory, "text"),
+                    Pair(binding.imgLogo, "logo")
+                )
+            startActivity(intent, optionsCompact.toBundle())
         }
 
     }
@@ -112,10 +118,16 @@ class HomepageActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.btn_setting) {
-            viewModel.logout()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            val intent = Intent(this, SettingActivity::class.java)
+            val optionsCompat: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@HomepageActivity,
+                    Pair(binding.btnStory, "name"),
+                    Pair(binding.imgAvatar, "avatar"),
+                    Pair(binding.imgLogo, "logo")
+                )
+            startActivity(intent, optionsCompat.toBundle())
+//            finish()
 
         }
         return super.onOptionsItemSelected(item)

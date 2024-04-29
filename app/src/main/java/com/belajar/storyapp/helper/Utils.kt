@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.view.View
+import android.widget.ProgressBar
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -20,9 +22,8 @@ val MAX_SIZE = 1000000
 
 fun String.toDateFormat() : String {
     val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
-    val outputDate = SimpleDateFormat("HH:mm:ss, dd/MMM/yyyy", Locale.US)
-    val dateFormatted = inputFormat.parse(this) ?: return ""
-    return outputDate.format(dateFormatted)
+    val dateFormatted = inputFormat.parse(this) as Date
+    return DateFormat.getDateInstance(DateFormat.FULL).format(dateFormatted)
 
 
 //    val dateFormatted = date.parse(this) as Date
@@ -67,6 +68,10 @@ fun File.reduceFileImage(): File {
 
 fun isValidEmail(email: String): Boolean {
     return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+}
+
+fun showLoading(isLoading: Boolean, loadingView: ProgressBar) {
+    loadingView.visibility = if (isLoading) View.VISIBLE else View.GONE
 }
 
 

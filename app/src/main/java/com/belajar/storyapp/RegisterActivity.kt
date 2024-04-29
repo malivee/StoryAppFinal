@@ -5,11 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.belajar.storyapp.databinding.ActivityRegisterBinding
@@ -40,6 +43,24 @@ class RegisterActivity : AppCompatActivity() {
 
         buttonDisabled()
 
+        binding.main.setOnClickListener {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
+        }
+
+        binding.btnRegGuest.setOnClickListener {
+            val intent = Intent(this, StoryActivity::class.java)
+            val optionsCompat: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@RegisterActivity,
+                    Pair(binding.imgLogo, "logo"),
+                    Pair(binding.edRegPassword, "text"),
+                    Pair(binding.btnRegGuest, "submit")
+
+                )
+            startActivity(intent, optionsCompat.toBundle())
+        }
+
         binding.btnRegRegister.setOnClickListener {
             viewModel.postRegister(
                 binding.nameEditReg.text.toString(),
@@ -48,13 +69,34 @@ class RegisterActivity : AppCompatActivity() {
             ).observe(this) {
                 if (it != null) {
                     when (it) {
-                        is Result.Failure -> Toast.makeText(this@RegisterActivity, "Email taken, choose another email",Toast.LENGTH_SHORT).show()
+                        is Result.Failure -> {
+                            binding.emailEditReg.setBackgroundResource(R.drawable.text_edit_error)
+                            binding.passwordEditReg.setBackgroundResource(R.drawable.text_edit_error)
+                            binding.tvError.visibility = View.VISIBLE
+                        }
+
                         Result.Loading -> {}
                         is Result.Success -> {
                             buttonDisabled()
-                            Toast.makeText(this@RegisterActivity, "Register Success, please login to your account", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@RegisterActivity,
+                                getString(R.string.register_success),
+                                Toast.LENGTH_SHORT
+                            ).show()
                             val intent = Intent(this, LoginActivity::class.java)
-                            startActivity(intent)
+                            val optionsCompact: ActivityOptionsCompat =
+                                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                    this@RegisterActivity,
+                                    Pair(binding.btnRegRegister, "register"),
+                                    Pair(binding.btnRegGuest, "guest"),
+                                    Pair(binding.tvRegTitle, "title"),
+                                    Pair(binding.tvRegDesc, "description"),
+                                    Pair(binding.tvRegEmail, "email"),
+                                    Pair(binding.edRegEmail, "email2"),
+                                    Pair(binding.tvRegPassword, "password"),
+                                    Pair(binding.edRegPassword, "password2")
+                                )
+                            startActivity(intent, optionsCompact.toBundle())
                         }
                     }
                 }
@@ -65,14 +107,28 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-        binding.root.setOnClickListener {
+        binding.main.setOnClickListener {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(it.windowToken, 0)
         }
 
         binding.btnLoginHere.setOnClickListener {
             val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-            startActivity(intent)
+            val optionsCompact: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@RegisterActivity,
+                    Pair(binding.btnRegRegister, "register"),
+                    Pair(binding.btnRegGuest, "guest"),
+                    Pair(binding.tvRegTitle, "title"),
+                    Pair(binding.tvRegDesc, "description"),
+                    Pair(binding.tvRegEmail, "email"),
+                    Pair(binding.edRegEmail, "email2"),
+                    Pair(binding.tvRegPassword, "password"),
+                    Pair(binding.edRegPassword, "password2"),
+                    Pair(binding.tvLoginHere, "account1"),
+                    Pair(binding.btnLoginHere, "account2")
+                )
+            startActivity(intent, optionsCompact.toBundle())
         }
     }
 
