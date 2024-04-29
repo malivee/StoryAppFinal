@@ -95,11 +95,7 @@
                 android:overScrollMode="ifContentScrolls"
                 android:lines="15" />
 
-
-
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
     <Button

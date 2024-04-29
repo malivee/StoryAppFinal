@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Dicoding Storyposting</string>
     <string name="title">Welcome to Dicoding Storyposting!</string>
-    <string name="title2">Start sharing your stories with others </string>
+    <string name="title2">Start sharing your stories with others</string>
     <string name="title3">Every story you share is important</string>
     <string name="description1">Ready to start sharing your stories? Dive in and login to share stories. We can\'t wait to see what you\'ll create!</string>
     <string name="description2">You can start by sharing your stories within our welcoming community and be inspired by fellow dicoding users</string>
@@ -20,16 +20,16 @@
 
     <string name="story">Post your own story here....</string>
     <string name="setting">Setting</string>
-    <string name="submit">Submit</string>
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="submit">Upload</string>
+    <string name="title_activity_fullscreen" translatable="false">FullscreenActivity</string>
+    <string name="dummy_button" translatable="false">Dummy Button</string>
+    <string name="dummy_content" translatable="false">DUMMY\nCONTENT</string>
 
 
     <string name="error_open_camera">Error opening the camera</string>
     <string name="login_title">Please enter your E-mail and Password</string>
     <string name="login_subtitle">Login to your account</string>
-    <string name="email">E-mail</string>
+    <string name="email" translatable="false">E-mail</string>
     <string name="password">Password</string>
     <string name="register_title">Please input your data to register</string>
     <string name="register_subtitle">Register your account</string>
@@ -48,4 +48,7 @@
     <string name="permission_granted">Permission Granted</string>
     <string name="permission_denied">Permission Denied</string>
     <string name="error_post_story">Something went wrong, please try again</string>
+    <string name="language_available">Only available in English (US) and Indonesian</string>
+    <string name="cta_story">Create your story now!</string>
+    <string name="cta_story_title">Interested to make your own story? Start now</string>
 </resources>

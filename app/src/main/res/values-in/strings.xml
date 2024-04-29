@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dicoding Storyposting</string>
+    <string name="title">Welcome to Dicoding Storyposting!</string>
+    <string name="title2">Mulai share story mu dengan yang lainnya</string>
+    <string name="title3">Setiap story yang kamu share itu penting</string>
+    <string name="description1">Siap untuk mulai share storymu? Mulai sekarang dan segera login. Kami tak sabar melihat story apa yang kamu buat!</string>
+    <string name="description2">Kamu dapat memulai dengan membagikan ceritamu didalam komunitas yang menyenangkan dan terinspirasi dengan sesama pengguna dicoding</string>
+    <string name="description3">Storymu berharga. Mereka mempunyai kekuatan untuk menginspirasi dan membuat perubahan di komunitas kami. Ayo share hari ini juga!</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="or">atau</string>
+    <string name="guest">Posting sebagai tamu</string>
+    <string name="error_password">Kata sandi harus lebih dari 8 karakter</string>
+    <string name="error_email">Mohon memasukan format E-mail yang benar</string>
+    <string name="register_here">Daftar sekarang</string>
+    <string name="no_account">Belum punya akun?</string>
+    <string name="story">Buat storymu disini.....</string>
+    <string name="setting">Pengaturan</string>
+    <string name="submit">Unggah</string>
+    <string name="error_open_camera">Kesalahan saat membuka kamera</string>
+    <string name="login_title">Masukan email dan kata sandi anda</string>
+    <string name="login_subtitle">Masuk ke akun anda</string>
+    <string name="password">Kata sandi</string>
+    <string name="register_title">Masukkan datamu untuk daftar</string>
+    <string name="register_subtitle">Daftarkan akun anda</string>
+    <string name="name">Nama</string>
+    <string name="have_account">Sudah punya akun</string>
+    <string name="login_here">Login sekarang</string>
+    <string name="gallery">Galeri</string>
+    <string name="camerax">KameraX</string>
+    <string name="language">Ganti bahasa</string>
+    <string name="logout">Keluar</string>
+    <string name="camera_capture_error">Gagal menanggkap gambar</string>
+    <string name="error_login">Email atau kata sandi salah</string>
+    <string name="error_register">Email sudah terdaftar</string>
+    <string name="register_success">Daftar berhasil, silahkan masuk dengan akun anda</string>
+    <string name="error_get_story">Kesalahan mengambil data, silahkan coba lagi</string>
+    <string name="permission_granted">Izin diberikan</string>
+    <string name="permission_denied">Izin ditolak</string>
+    <string name="error_post_story">Ada yang salah, silahkan coba lagi</string>
+    <string name="language_available">"Hanya tersedia dalam bahasa Inggris (AS) dan Indonesia "</string>
+    <string name="cta_story">Buat storymu sekarang!</string>
+    <string name="cta_story_title">Tertarik untuk membuat storymu sendiri?</string>
+</resources>
