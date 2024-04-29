@@ -61,10 +61,24 @@ class StoryActivity : AppCompatActivity() {
 
         supportActionBar?.apply {
             title = null
-            setHomeButtonEnabled(true)
-            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
+            viewModel.getLoginData().observe(this@StoryActivity) {
+                if (!it.isLogin) {
+                    setHomeButtonEnabled(false)
+                    setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
+                    setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+
+                } else {
+                    setHomeButtonEnabled(true)
+                    setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
 //            setBackgroundDrawable(ColorDrawable(getColor(R.color.dark_blue)))
-            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                }
+            }
+//            setHomeButtonEnabled(true)
+//            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
+////            setBackgroundDrawable(ColorDrawable(getColor(R.color.dark_blue)))
+//            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
 
         }
@@ -314,8 +328,8 @@ class StoryActivity : AppCompatActivity() {
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 //        menuInflater.inflate(R.menu.option_menu, menu)
 //
-////        val settingItem = menu?.findItem(R.id.btn_setting)
-////        settingItem?.icon?.setTint(ContextCompat.getColor(this, R.color.white))
+//        val settingItem = menu?.findItem(R.id.btn_setting)
+//        settingItem?.icon?.setTint(ContextCompat.getColor(this, R.color.white))
 //
 //        return super.onCreateOptionsMenu(menu)
 //    }
@@ -328,12 +342,23 @@ class StoryActivity : AppCompatActivity() {
 //    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.option_menu, menu)
+        viewModel.getLoginData().observe(this@StoryActivity) {
+            if (it.isLogin) {
+                menuInflater.inflate(R.menu.option_menu, menu)
+
+            } else {
+
+                val settingItem = menu?.findItem(R.id.btn_setting)
+                settingItem?.icon?.setTint(ContextCompat.getColor(this, R.color.white))
+            }
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         if (item.itemId == R.id.btn_setting) {
+
             val intent = Intent(this, SettingActivity::class.java)
             val optionsCompat: ActivityOptionsCompat =
                 ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -343,9 +368,15 @@ class StoryActivity : AppCompatActivity() {
                     Pair(binding.btnSubmit, "logout")
                 )
             startActivity(intent, optionsCompat.toBundle())
+
+
+
+
+            }
+
 //            finish()
 
-        }
+
         return super.onOptionsItemSelected(item)
     }
 

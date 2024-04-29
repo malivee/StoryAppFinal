@@ -35,12 +35,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:label="@string/title_activity_fullscreen"
-            android:theme="@style/Theme.StoryApp.Fullscreen" />
-        <activity
             android:name=".StoryActivity"
             android:exported="false"
             android:parentActivityName=".HomepageActivity"

@@ -188,6 +188,7 @@
         android:alpha="0"
         tools:alpha="1"
         android:text="@string/login"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btn_register" />

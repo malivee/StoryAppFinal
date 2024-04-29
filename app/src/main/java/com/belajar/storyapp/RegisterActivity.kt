@@ -1,5 +1,6 @@
 package com.belajar.storyapp
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
