@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".view.login.LoginActivity">
 
     <ImageView
         android:id="@+id/img_logo"
@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_log_email">
 
         <com.belajar.storyapp.customview.EmailLayout
-            android:id="@+id/email_edit_log"
+            android:id="@+id/ed_login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -108,7 +108,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_log_password">
 
         <com.belajar.storyapp.customview.PasswordLayout
-            android:id="@+id/password_edit_log"
+            android:id="@+id/ed_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

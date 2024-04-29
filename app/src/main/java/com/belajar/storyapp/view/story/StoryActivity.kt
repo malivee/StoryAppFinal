@@ -1,4 +1,4 @@
-package com.belajar.storyapp
+package com.belajar.storyapp.view.story
 
 import android.Manifest
 import android.app.Activity
@@ -26,12 +26,17 @@ import androidx.core.net.toUri
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.belajar.storyapp.R
 import com.belajar.storyapp.databinding.ActivityStoryBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
 import com.belajar.storyapp.helper.reduceFileImage
 import com.belajar.storyapp.helper.showLoading
 import com.belajar.storyapp.helper.uriToFile
+import com.belajar.storyapp.view.camera.CameraActivity
+import com.belajar.storyapp.view.home.HomepageActivity
+import com.belajar.storyapp.view.main.MainActivity
+import com.belajar.storyapp.view.setting.SettingActivity
 import com.yalantis.ucrop.UCrop
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -75,12 +80,6 @@ class StoryActivity : AppCompatActivity() {
                     setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 }
             }
-//            setHomeButtonEnabled(true)
-//            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
-////            setBackgroundDrawable(ColorDrawable(getColor(R.color.dark_blue)))
-//            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-
         }
 
         binding.main.setOnClickListener {
@@ -89,8 +88,6 @@ class StoryActivity : AppCompatActivity() {
         }
 
         binding.btnGallery.setOnClickListener {
-//            galleryLauncher.launch("image/*")
-
             galleryLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
@@ -103,7 +100,7 @@ class StoryActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnSubmit.setOnClickListener {
+        binding.buttonAdd.setOnClickListener {
             viewModel.getLoginData().observe(this) {
                 if (it.isLogin) {
                     postStory()
@@ -119,10 +116,7 @@ class StoryActivity : AppCompatActivity() {
     private fun postStory() {
         currentImageUri.let {
             val imageFile = it?.let { uri -> uriToFile(uri, this@StoryActivity).reduceFileImage() }
-            val description = binding.edInput.text.toString()
-
-//            val name = intent.getStringExtra(HomepageActivity.EXTRA_NAME).toString()
-//            val token = intent.getStringExtra(HomepageActivity.EXTRA_TOKEN).toString()
+            val description = binding.edAddDescription.text.toString()
 
             val requestBody = description.toRequestBody("text/plain".toMediaType())
             val requestImageFile = imageFile?.asRequestBody("image/jpeg".toMediaType())
@@ -151,33 +145,23 @@ class StoryActivity : AppCompatActivity() {
                             Result.Loading -> {
                                 showLoading(true, binding.progressBar)
                             }
+
                             is Result.Success -> {
                                 showLoading(false, binding.progressBar)
-//                                    if (token == null) {
-//                                        val intent =
-//                                            Intent(this@StoryActivity, MainActivity::class.java)
-//                                        startActivity(intent)
-//                                        Toast.makeText(
-//                                            this@StoryActivity,
-//                                            it.data.message,
-//                                            Toast.LENGTH_SHORT
-//                                        ).show()
-//                                    } else {
                                 Toast.makeText(
                                     this@StoryActivity,
                                     it.data.message,
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 val intent = Intent(this, HomepageActivity::class.java)
-                                val optionsCompat : ActivityOptionsCompat =
+                                val optionsCompat: ActivityOptionsCompat =
                                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                                         this@StoryActivity,
                                         Pair(binding.imgStoryPhoto, "logo"),
-                                        Pair(binding.edInput, "text")
+                                        Pair(binding.edAddDescription, "text")
                                     )
                                 startActivity(intent, optionsCompat.toBundle())
                                 finish()
-//                                    }
                             }
                         }
                     }
@@ -192,10 +176,7 @@ class StoryActivity : AppCompatActivity() {
     private fun postStoryGuest() {
         currentImageUri?.let {
             val imageFile = it?.let { uri -> uriToFile(uri, this@StoryActivity) }
-            val description = binding.edInput.text.toString()
-
-//            val name = intent.getStringExtra(HomepageActivity.EXTRA_NAME).toString()
-//            val token = intent.getStringExtra(HomepageActivity.EXTRA_TOKEN).toString()
+            val description = binding.edAddDescription.text.toString()
 
             val requestBody = description.toRequestBody("text/plain".toMediaType())
             val requestImageFile = imageFile?.asRequestBody("image/jpeg".toMediaType())
@@ -223,11 +204,12 @@ class StoryActivity : AppCompatActivity() {
                             Result.Loading -> {
                                 showLoading(true, binding.progressBar)
                             }
+
                             is Result.Success -> {
                                 showLoading(false, binding.progressBar)
                                 val intent =
                                     Intent(this@StoryActivity, MainActivity::class.java)
-                                val optionsCompat : ActivityOptionsCompat =
+                                val optionsCompat: ActivityOptionsCompat =
                                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                                         this@StoryActivity,
                                         Pair(binding.imgStoryPhoto, "logo")
@@ -261,7 +243,6 @@ class StoryActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.permission_denied), Toast.LENGTH_SHORT).show()
         }
     }
-
 
     private val cameraXLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -317,29 +298,9 @@ class StoryActivity : AppCompatActivity() {
         currentImageUri?.let {
             cropImage(it)
             binding.imgStoryPhoto.setImageURI(it)
-//            binding.imgStoryPhoto.load(it) {
-//                placeholder(R.drawable.dicoding_logo_blur)
-//            }
             Log.d("ImageUri", "showImage: $it")
         }
     }
-
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.option_menu, menu)
-//
-//        val settingItem = menu?.findItem(R.id.btn_setting)
-//        settingItem?.icon?.setTint(ContextCompat.getColor(this, R.color.white))
-//
-//        return super.onCreateOptionsMenu(menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if (item.itemId == R.id.btn_setting) {
-//
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         viewModel.getLoginData().observe(this@StoryActivity) {
@@ -363,20 +324,12 @@ class StoryActivity : AppCompatActivity() {
             val optionsCompat: ActivityOptionsCompat =
                 ActivityOptionsCompat.makeSceneTransitionAnimation(
                     this@StoryActivity,
-                    Pair(binding.edInput, "name"),
+                    Pair(binding.edAddDescription, "name"),
                     Pair(binding.imgStoryPhoto, "logo"),
-                    Pair(binding.btnSubmit, "logout")
+                    Pair(binding.buttonAdd, "logout")
                 )
             startActivity(intent, optionsCompat.toBundle())
-
-
-
-
-            }
-
-//            finish()
-
-
+        }
         return super.onOptionsItemSelected(item)
     }
 

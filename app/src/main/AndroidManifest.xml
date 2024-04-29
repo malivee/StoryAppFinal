@@ -18,40 +18,40 @@
         android:theme="@style/Theme.StoryApp"
         tools:targetApi="31">
         <activity
-            android:name=".SettingActivity"
+            android:name=".view.setting.SettingActivity"
             android:exported="false"
             android:theme="@style/Theme.StoryApp.ActionBar"
-            android:parentActivityName=".HomepageActivity"/>
+            android:parentActivityName=".view.home.HomepageActivity"/>
         <activity
-            android:name=".DetailActivity"
+            android:name=".view.detail.DetailActivity"
             android:exported="false"
-            android:parentActivityName=".HomepageActivity"
+            android:parentActivityName=".view.home.HomepageActivity"
             android:theme="@style/Theme.StoryApp.ActionBar" />
         <activity
-            android:name=".CameraActivity"
+            android:name=".view.camera.CameraActivity"
             android:exported="false" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".StoryActivity"
+            android:name=".view.story.StoryActivity"
             android:exported="false"
-            android:parentActivityName=".HomepageActivity"
+            android:parentActivityName=".view.home.HomepageActivity"
             android:theme="@style/Theme.StoryApp.ActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".HomepageActivity"
+            android:name=".view.home.HomepageActivity"
             android:exported="false"
             android:theme="@style/Theme.StoryApp.ActionBar" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".view.register.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".view.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.main.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.SplashScreen.StoryApps">
             <intent-filter>

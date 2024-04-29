@@ -1,4 +1,4 @@
-package com.belajar.storyapp
+package com.belajar.storyapp.view.camera
 
 import android.content.Intent
 import android.os.Build
@@ -20,6 +20,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.belajar.storyapp.R
 import com.belajar.storyapp.databinding.ActivityCameraBinding
 import com.belajar.storyapp.helper.temptFile
 
@@ -96,7 +97,7 @@ class CameraActivity : AppCompatActivity() {
             val cameraProvider: ProcessCameraProvider = processCameraProvider.get()
             val preview = Preview.Builder()
                 .build().also {
-                  it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
                 }
 
             imageCapture = ImageCapture.Builder().build()
@@ -109,8 +110,9 @@ class CameraActivity : AppCompatActivity() {
                     preview,
                     imageCapture
                 )
-            } catch (e: Exception){
-                Toast.makeText(this@CameraActivity, R.string.error_open_camera, Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Toast.makeText(this@CameraActivity, R.string.error_open_camera, Toast.LENGTH_SHORT)
+                    .show()
                 Log.e("StartCamera", "startCamera: $e")
             }
         }, ContextCompat.getMainExecutor(this))
@@ -135,13 +137,14 @@ class CameraActivity : AppCompatActivity() {
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    Toast.makeText(this@CameraActivity,
-                        getString(R.string.camera_capture_error), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@CameraActivity,
+                        getString(R.string.camera_capture_error), Toast.LENGTH_SHORT
+                    ).show()
                 }
 
             }
         )
-
 
 
     }

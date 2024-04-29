@@ -1,4 +1,4 @@
-package com.belajar.storyapp
+package com.belajar.storyapp.view.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,7 @@ import com.belajar.storyapp.data.model.DataModel
 import com.belajar.storyapp.helper.Result
 import kotlinx.coroutines.launch
 
-class HomepageViewModel(private val storyRepository: StoryRepository): ViewModel() {
+class HomepageViewModel(private val storyRepository: StoryRepository) : ViewModel() {
     fun getStories(): LiveData<Result<AllStoryResponse>> = storyRepository.getStories()
 
     fun getLoginData(): LiveData<DataModel> {

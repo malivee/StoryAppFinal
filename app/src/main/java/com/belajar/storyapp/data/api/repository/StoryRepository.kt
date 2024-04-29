@@ -1,30 +1,20 @@
 package com.belajar.storyapp.data.api.repository
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.util.Log
-import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.belajar.storyapp.data.api.response.AllStoryResponse
 import com.belajar.storyapp.data.api.response.DetailResponse
-import com.belajar.storyapp.data.api.response.ListStoryItem
 import com.belajar.storyapp.data.api.response.LoginResponse
 import com.belajar.storyapp.data.api.response.RegisterResponse
 import com.belajar.storyapp.data.api.response.UploadResponse
-import com.belajar.storyapp.data.api.retrofit.ApiConfig
 import com.belajar.storyapp.data.api.retrofit.ApiService
 import com.belajar.storyapp.data.model.DataModel
 import com.belajar.storyapp.helper.AuthPreference
 import com.belajar.storyapp.helper.Result
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.firstOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONException
 import retrofit2.HttpException
 
 class StoryRepository private constructor(
@@ -32,7 +22,11 @@ class StoryRepository private constructor(
     private val authPreference: AuthPreference
 ) {
 
-    fun postRegister(name: String, email: String, password: String): LiveData<Result<RegisterResponse>> = liveData {
+    fun postRegister(
+        name: String,
+        email: String,
+        password: String
+    ): LiveData<Result<RegisterResponse>> = liveData {
         emit(Result.Loading)
 
         try {
@@ -40,7 +34,6 @@ class StoryRepository private constructor(
             if (client.error == false) {
                 emit(Result.Success(client))
             } else {
-//                emit(Result.Failure(client.message.toString()))
                 Log.e("PostRegister", "${client.message}")
             }
         } catch (e: Exception) {
@@ -106,7 +99,10 @@ class StoryRepository private constructor(
     }
 
 
-    fun postStory(multipartBody: MultipartBody.Part, description: RequestBody): LiveData<Result<UploadResponse>> = liveData {
+    fun postStory(
+        multipartBody: MultipartBody.Part,
+        description: RequestBody
+    ): LiveData<Result<UploadResponse>> = liveData {
         emit(Result.Loading)
 
 
@@ -125,7 +121,10 @@ class StoryRepository private constructor(
         }
     }
 
-    fun postStoryGuest(multipartBody: MultipartBody.Part, description: RequestBody): LiveData<Result<UploadResponse>> = liveData {
+    fun postStoryGuest(
+        multipartBody: MultipartBody.Part,
+        description: RequestBody
+    ): LiveData<Result<UploadResponse>> = liveData {
         emit(Result.Loading)
 
         try {
@@ -142,6 +141,7 @@ class StoryRepository private constructor(
             e.printStackTrace()
         }
     }
+
     suspend fun saveData(dataModel: DataModel) {
         authPreference.saveData(dataModel)
     }
@@ -158,7 +158,7 @@ class StoryRepository private constructor(
     companion object {
         private var instance: StoryRepository? = null
         fun getInstance(apiService: ApiService, authPreference: AuthPreference): StoryRepository =
-            instance?: synchronized(this) {
+            instance ?: synchronized(this) {
                 instance ?: StoryRepository(apiService, authPreference)
             }.also { instance = it }
     }

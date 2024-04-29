@@ -2,7 +2,7 @@
 <resources>
     <style name="Theme.SplashScreen.StoryApps" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/white</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/frame_18</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/dicoding_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.StoryApp</item>
     </style>
 </resources>

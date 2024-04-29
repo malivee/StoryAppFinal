@@ -1,4 +1,4 @@
-package com.belajar.storyapp
+package com.belajar.storyapp.view.home
 
 import android.content.Intent
 import android.graphics.Color
@@ -16,6 +16,9 @@ import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.belajar.storyapp.R
+import com.belajar.storyapp.view.setting.SettingActivity
+import com.belajar.storyapp.view.story.StoryActivity
 import com.belajar.storyapp.databinding.ActivityHomepageBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
@@ -40,12 +43,6 @@ class HomepageActivity : AppCompatActivity() {
             insets
         }
 
-
-
-
-
-
-
         supportActionBar?.apply {
             title = null
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -55,16 +52,6 @@ class HomepageActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         binding.rvStory.adapter = adapter
         binding.rvStory.layoutManager = layoutManager
-
-//        val token = intent.getStringExtra(LoginActivity.EXTRA_RESULT)
-//        val token = viewModel.getLoginData().observe(this) {
-//            it.token
-//        }
-//        val tokenGet = token.toString()
-//        val tokenFromMain = intent.getStringExtra(MainActivity.EXTRA_TOKEN)
-//        val name = intent.getStringExtra(LoginActivity.EXTRA_NAME)
-//        val nameMain = intent.getStringExtra(MainActivity.EXTRA_NAME_MAIN)
-//        Log.i("TOKENHOME", tokenFromMain.toString())
 
 
         viewModel.getStories().observe(this) {
@@ -82,6 +69,7 @@ class HomepageActivity : AppCompatActivity() {
                     Result.Loading -> {
                         showLoading(true, binding.progressBar)
                     }
+
                     is Result.Success -> {
                         showLoading(false, binding.progressBar)
                         it.let {
@@ -94,7 +82,6 @@ class HomepageActivity : AppCompatActivity() {
             }
 
         }
-//        Log.d("ViewDebug","$viewDebug.")
 
         viewModel.getLoginData().observe(this) {
             val loginState = it.isLogin
@@ -134,15 +121,9 @@ class HomepageActivity : AppCompatActivity() {
                     Pair(binding.imgLogo, "logo")
                 )
             startActivity(intent, optionsCompat.toBundle())
-//            finish()
 
         }
         return super.onOptionsItemSelected(item)
     }
-
-//    companion object {
-//        const val EXTRA_NAME = "name_extra"
-//        const val EXTRA_TOKEN = "token_extra"
-//    }
 
 }

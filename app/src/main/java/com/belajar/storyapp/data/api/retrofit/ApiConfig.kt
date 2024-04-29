@@ -2,16 +2,8 @@ package com.belajar.storyapp.data.api.retrofit
 
 import android.util.Log
 import com.belajar.storyapp.BuildConfig
-import com.belajar.storyapp.data.model.DataModel
 import com.belajar.storyapp.helper.AuthPreference
-import kotlinx.coroutines.flow.collectIndexed
-import kotlinx.coroutines.flow.drop
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.take
-import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.flow.withIndex
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

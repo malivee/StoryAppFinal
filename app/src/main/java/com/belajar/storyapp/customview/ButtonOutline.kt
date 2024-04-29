@@ -8,12 +8,13 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import com.belajar.storyapp.R
 
-class ButtonOutline: AppCompatButton {
+class ButtonOutline : AppCompatButton {
 
-    constructor(context: Context): super(context)
-    constructor(context: Context, attrs: AttributeSet): super(context, attrs)
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    private var outlineButton: Drawable = ContextCompat.getDrawable(context, R.drawable.outline_btn) as Drawable
+    private var outlineButton: Drawable =
+        ContextCompat.getDrawable(context, R.drawable.outline_btn) as Drawable
     private var textColor: Int = 0
 
     init {

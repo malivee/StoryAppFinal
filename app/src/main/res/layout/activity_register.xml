@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".view.register.RegisterActivity">
 
     <ImageView
         android:id="@+id/img_logo"
@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_reg_name">
 
         <EditText
-            android:id="@+id/name_edit_reg"
+            android:id="@+id/ed_register_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -105,7 +105,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_reg_email">
 
         <com.belajar.storyapp.customview.EmailLayout
-            android:id="@+id/email_edit_reg"
+            android:id="@+id/ed_register_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -139,7 +139,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_reg_password">
 
         <com.belajar.storyapp.customview.PasswordLayout
-            android:id="@+id/password_edit_reg"
+            android:id="@+id/ed_register_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

@@ -1,4 +1,4 @@
-package com.belajar.storyapp
+package com.belajar.storyapp.view.setting
 
 import android.content.Intent
 import android.graphics.Color
@@ -10,12 +10,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.belajar.storyapp.R
 import com.belajar.storyapp.databinding.ActivitySettingBinding
-import com.belajar.storyapp.helper.AuthPreference
 import com.belajar.storyapp.helper.ViewModelFactory
-import com.belajar.storyapp.helper.dataStore
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.runBlocking
+import com.belajar.storyapp.view.main.MainActivity
 
 class SettingActivity : AppCompatActivity() {
 

@@ -30,8 +30,8 @@ interface ApiService {
     @FormUrlEncoded
     @POST("login")
     suspend fun login(
-       @Field("email") email: String,
-       @Field("password") password: String
+        @Field("email") email: String,
+        @Field("password") password: String
     ): LoginResponse
 
     @GET("stories")
@@ -39,7 +39,7 @@ interface ApiService {
 
     @GET("stories/{id}")
     suspend fun getDetailedStory(
-        @Path("id") id : String
+        @Path("id") id: String
     ): DetailResponse
 
     @Multipart

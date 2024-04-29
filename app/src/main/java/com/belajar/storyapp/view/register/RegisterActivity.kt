@@ -1,6 +1,5 @@
-package com.belajar.storyapp
+package com.belajar.storyapp.view.register
 
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,16 +15,18 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.belajar.storyapp.R
 import com.belajar.storyapp.databinding.ActivityRegisterBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
 import com.belajar.storyapp.helper.isValidEmail
 import com.belajar.storyapp.helper.showLoading
+import com.belajar.storyapp.view.login.LoginActivity
+import com.belajar.storyapp.view.story.StoryActivity
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-    private var isDisabled = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,15 +65,15 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.btnRegRegister.setOnClickListener {
             viewModel.postRegister(
-                binding.nameEditReg.text.toString(),
-                binding.emailEditReg.text.toString(),
-                binding.passwordEditReg.text.toString()
+                binding.edRegisterName.text.toString(),
+                binding.edRegisterEmail.text.toString(),
+                binding.edRegisterPassword.text.toString()
             ).observe(this) {
                 if (it != null) {
                     when (it) {
                         is Result.Failure -> {
-                            binding.emailEditReg.setBackgroundResource(R.drawable.text_edit_error)
-                            binding.passwordEditReg.setBackgroundResource(R.drawable.text_edit_error)
+                            binding.edRegisterEmail.setBackgroundResource(R.drawable.text_edit_error)
+                            binding.edRegisterPassword.setBackgroundResource(R.drawable.text_edit_error)
                             binding.tvError.visibility = View.VISIBLE
                             showLoading(false, binding.progressBar)
 
@@ -82,6 +83,7 @@ class RegisterActivity : AppCompatActivity() {
                             showLoading(true, binding.progressBar)
 
                         }
+
                         is Result.Success -> {
                             showLoading(false, binding.progressBar)
                             buttonDisabled()
@@ -140,9 +142,9 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun buttonDisabled() {
-        val emailDisable = !isValidEmail(binding.emailEditReg.text.toString())
-        val nameDisable = binding.nameEditReg.text.toString().isEmpty()
-        val passwordDisable = binding.passwordEditReg.text.toString().length <= 8
+        val emailDisable = !isValidEmail(binding.edRegisterEmail.text.toString())
+        val nameDisable = binding.edRegisterName.text.toString().isEmpty()
+        val passwordDisable = binding.edRegisterPassword.text.toString().length < 8
 
         if (!emailDisable && !nameDisable && !passwordDisable) {
             binding.btnRegRegister.isEnabled = true
@@ -157,21 +159,6 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-//    private fun buttonDisabled() {
-//        val email = binding.emailEditReg.text.toString()
-//        val name = binding.nameEditReg.text.toString()
-//        val password = binding.passwordEditReg.text.toString()
-//
-//        val isValidEmail = isValidEmail(email)
-//        val isNameEmpty = name.isEmpty()
-//        val isPasswordValid = password.length >= 8
-//
-//        val isButtonEnabled = isValidEmail && !isNameEmpty && isPasswordValid
-//
-//        binding.btnRegRegister.isEnabled = isButtonEnabled
-//        binding.btnRegRegister.setBackgroundColor(getColor(if (isButtonEnabled) R.color.dark_blue else R.color.dark_blue_disabled))
-//    }
-
     private fun setupInputListener() {
         val textWatcher = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -184,11 +171,9 @@ class RegisterActivity : AppCompatActivity() {
                 buttonDisabled()
             }
         }
-        binding.emailEditReg.addTextChangedListener(textWatcher)
-        binding.passwordEditReg.addTextChangedListener(textWatcher)
-        binding.nameEditReg.addTextChangedListener(textWatcher)
-
-
+        binding.edRegisterEmail.addTextChangedListener(textWatcher)
+        binding.edRegisterPassword.addTextChangedListener(textWatcher)
+        binding.edRegisterName.addTextChangedListener(textWatcher)
     }
 
 }

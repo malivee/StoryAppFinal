@@ -29,7 +29,7 @@
 
 
         <TextView
-            android:id="@+id/item_detail_name"
+            android:id="@+id/tv_detail_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
@@ -49,7 +49,7 @@
 
 
         <TextView
-            android:id="@+id/item_detail_desc"
+            android:id="@+id/tv_detail_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
@@ -61,16 +61,16 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            card_view:layout_constraintTop_toBottomOf="@id/item_detail_date"/>
+            card_view:layout_constraintTop_toBottomOf="@id/tv_detail_date"/>
         <TextView
-            android:id="@+id/item_detail_date"
+            android:id="@+id/tv_detail_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="@tools:sample/lorem"
             android:textSize="11sp"
             android:fontFamily="sans-serif-condensed-light"
             android:layout_marginHorizontal="16dp"
-            card_view:layout_constraintTop_toBottomOf="@+id/item_detail_name"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_detail_name"
             card_view:layout_constraintStart_toEndOf="@+id/avatar_detail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

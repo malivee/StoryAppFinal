@@ -1,8 +1,6 @@
 package com.belajar.storyapp.customview
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -16,14 +14,14 @@ class PasswordLayout @JvmOverloads constructor(
 ) : AppCompatEditText(context, attrs), View.OnTouchListener {
 
     init {
-        addTextChangedListener(object : TextWatcher{
+        addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 s.let {
-                    if ((it?.length ?: 0) <= 8) {
+                    if ((it?.length ?: 0) < 8) {
                         setError(context.getString(R.string.error_password), null)
                         setBackgroundResource(R.drawable.text_edit_error)
                     } else {
@@ -41,9 +39,6 @@ class PasswordLayout @JvmOverloads constructor(
 
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean = true
-
-
-
 
 
 }

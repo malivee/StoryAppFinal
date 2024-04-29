@@ -24,20 +24,10 @@ class AuthPreference private constructor(
             it[NAME] = dataModel.name
             it[TOKEN] = dataModel.token
             it[IS_LOGIN] = true
-
         }
-//        editor.putString(NAME, dataModel.name)
-//        editor.putString(TOKEN, dataModel.token)
-//        editor.putBoolean(IS_LOGIN, dataModel.isLogin)
-//            .apply()
     }
 
     fun getData(): Flow<DataModel> {
-//        val dataModel = DataModel()
-//        dataModel.name = sharedPreference.getString(NAME, "")
-//        dataModel.token = sharedPreference.getString(TOKEN, "")
-//        dataModel.isLogin = sharedPreference.getBoolean(IS_LOGIN, true)
-//        return dataModel
         return dataStore.data.map {
             DataModel(
                 it[NAME] ?: "",
@@ -53,13 +43,6 @@ class AuthPreference private constructor(
         }
     }
 
-    suspend fun getToken(): Flow<String?> {
-        return dataStore.data.map {
-
-            it[TOKEN]
-
-        }
-    }
     companion object {
         @Volatile
         private var INSTANCE: AuthPreference? = null
@@ -68,12 +51,6 @@ class AuthPreference private constructor(
         private val TOKEN = stringPreferencesKey("token")
         private val IS_LOGIN = booleanPreferencesKey("isLogin")
 
-//        @Volatile
-//        private var INSTANCE: AuthPreference? = null
-//        fun getInstance(dataStore: DataStore<Preferences>): AuthPreference =
-//            INSTANCE ?: synchronized(this) {
-//                INSTANCE ?: AuthPreference(dataStore = dataStore)
-//            }.also { INSTANCE = it }
 
         fun getInstance(dataStore: DataStore<Preferences>): AuthPreference {
             return INSTANCE ?: synchronized(this) {

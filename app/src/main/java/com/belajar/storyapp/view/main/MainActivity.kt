@@ -1,11 +1,8 @@
-package com.belajar.storyapp
+package com.belajar.storyapp.view.main
 
-import android.animation.ObjectAnimator
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +12,11 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.belajar.storyapp.view.home.HomepageActivity
+import com.belajar.storyapp.view.login.LoginActivity
+import com.belajar.storyapp.R
+import com.belajar.storyapp.view.register.RegisterActivity
+import com.belajar.storyapp.view.story.StoryActivity
 import com.belajar.storyapp.databinding.ActivityMainBinding
 import com.belajar.storyapp.helper.ViewModelFactory
 

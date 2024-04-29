@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".DetailActivity">
+        tools:context=".view.detail.DetailActivity">
 
         <ImageView
             android:id="@+id/img_detail_logo"
@@ -26,7 +26,7 @@
 
 
         <ImageView
-            android:id="@+id/img_detail_photo"
+            android:id="@+id/iv_detail_photo"
             android:transitionName="profile"
             android:layout_width="match_parent"
             android:layout_height="500dp"
@@ -36,7 +36,7 @@
             android:foregroundGravity="top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_detail_desc"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_description"
             tools:src="@tools:sample/avatars" />
 
 
@@ -53,7 +53,7 @@
 
 
         <TextView
-            android:id="@+id/item_detail_name"
+            android:id="@+id/tv_detail_name"
             android:transitionName="name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
 
 
         <TextView
-            android:id="@+id/item_detail_desc"
+            android:id="@+id/tv_detail_description"
             android:transitionName="description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,11 +80,11 @@
             android:lineSpacingExtra="1.5sp"
             android:maxLines="4"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/item_detail_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_detail_date"
             tools:text="@tools:sample/lorem/random" />
 
         <TextView
-            android:id="@+id/item_detail_date"
+            android:id="@+id/tv_detail_date"
             android:transitionName="date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
             android:fontFamily="sans-serif-condensed-light"
             android:textSize="11sp"
             app:layout_constraintStart_toEndOf="@+id/avatar_detail"
-            app:layout_constraintTop_toBottomOf="@+id/item_detail_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_name"
             tools:text="@tools:sample/lorem" />
 
 
@@ -108,7 +108,7 @@
             android:text="@string/cta_story_title"
             android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@+id/img_detail_photo"
+            app:layout_constraintTop_toBottomOf="@+id/iv_detail_photo"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button

@@ -3,17 +3,18 @@ package com.belajar.storyapp.helper
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.belajar.storyapp.DetailViewModel
-import com.belajar.storyapp.HomepageViewModel
-import com.belajar.storyapp.LoginViewModel
-import com.belajar.storyapp.MainViewModel
-import com.belajar.storyapp.RegisterViewModel
-import com.belajar.storyapp.SettingViewModel
-import com.belajar.storyapp.StoryViewModel
+import com.belajar.storyapp.view.detail.DetailViewModel
+import com.belajar.storyapp.view.home.HomepageViewModel
+import com.belajar.storyapp.view.login.LoginViewModel
+import com.belajar.storyapp.view.main.MainViewModel
+import com.belajar.storyapp.view.register.RegisterViewModel
+import com.belajar.storyapp.view.setting.SettingViewModel
+import com.belajar.storyapp.view.story.StoryViewModel
 import com.belajar.storyapp.data.api.repository.StoryRepository
 import com.belajar.storyapp.di.Injection
 
-class ViewModelFactory(private val storyRepository: StoryRepository): ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(private val storyRepository: StoryRepository) :
+    ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECK_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

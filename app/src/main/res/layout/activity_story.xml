@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StoryActivity">
+    tools:context=".view.story.StoryActivity">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -77,11 +77,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_gallery"
-        app:layout_constraintBottom_toTopOf="@+id/btn_submit">
+        app:layout_constraintBottom_toTopOf="@+id/button_add">
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_input"
+                android:id="@+id/ed_add_description"
                 android:transitionName="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
 
 
     <Button
-        android:id="@+id/btn_submit"
+        android:id="@+id/button_add"
         android:transitionName="submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

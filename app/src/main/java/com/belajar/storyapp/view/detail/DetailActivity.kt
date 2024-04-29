@@ -1,4 +1,4 @@
-package com.belajar.storyapp
+package com.belajar.storyapp.view.detail
 
 import android.content.Intent
 import android.graphics.Color
@@ -13,7 +13,8 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.belajar.storyapp.R
+import com.belajar.storyapp.view.story.StoryActivity
 import com.belajar.storyapp.databinding.ActivityDetailBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
@@ -34,15 +35,14 @@ class DetailActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         supportActionBar?.apply {
             title = null
             setHomeButtonEnabled(true)
             setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
-//            setBackgroundDrawable(ColorDrawable(getColor(R.color.dark_blue)))
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-
         }
+
         val viewModelFactory = ViewModelFactory.getInstance(this)
         val viewModel: DetailViewModel by viewModels { viewModelFactory }
 
@@ -65,15 +65,16 @@ class DetailActivity : AppCompatActivity() {
                         Result.Loading -> {
                             showLoading(true, binding.progressBar)
                         }
+
                         is Result.Success -> {
                             showLoading(false, binding.progressBar)
                             Glide.with(this)
                                 .load(it.data.story?.photoUrl)
-                                .into(binding.imgDetailPhoto)
+                                .into(binding.ivDetailPhoto)
                             binding.apply {
-                                itemDetailName.text = it.data.story?.name
-                                itemDetailDesc.text = it.data.story?.description
-                                itemDetailDate.text = it.data.story?.createdAt?.toDateFormat()
+                                tvDetailName.text = it.data.story?.name
+                                tvDetailDescription.text = it.data.story?.description
+                                tvDetailDate.text = it.data.story?.createdAt?.toDateFormat()
                             }
                         }
                     }
@@ -87,7 +88,7 @@ class DetailActivity : AppCompatActivity() {
                 ActivityOptionsCompat.makeSceneTransitionAnimation(
                     this@DetailActivity,
                     Pair(binding.imgDetailLogo, "logo"),
-                    Pair(binding.itemDetailDesc, "text"),
+                    Pair(binding.tvDetailDescription, "text"),
                     Pair(binding.btnCta, "submit")
                 )
             startActivity(intent, optionsCompat.toBundle())

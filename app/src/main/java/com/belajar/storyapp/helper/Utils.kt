@@ -15,28 +15,21 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-val DATE_FORMAT = "ddMMyyyy_HHmmss"
-val date = SimpleDateFormat(DATE_FORMAT, Locale.US).format(Date())
-val MAX_SIZE = 1000000
+const val DATE_FORMAT = "ddMMyyyy_HHmmss"
+val date: String = SimpleDateFormat(DATE_FORMAT, Locale.US).format(Date())
+const val MAX_SIZE = 1000000
 
 
-fun String.toDateFormat() : String {
+fun String.toDateFormat(): String {
     val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
     val dateFormatted = inputFormat.parse(this) as Date
     return DateFormat.getDateInstance(DateFormat.FULL).format(dateFormatted)
-
-
-//    val dateFormatted = date.parse(this) as Date
-//    return DateFormat.getDateInstance(DateFormat.FULL).format(dateFormatted)
 }
 
 
-
-
-
-fun temptFile(context: Context) : File {
+fun temptFile(context: Context): File {
     val directory = context.externalCacheDir
-    return File.createTempFile(date, ".jpg",directory)
+    return File.createTempFile(date, ".jpg", directory)
 }
 
 fun uriToFile(imageUri: Uri, context: Context): File {
@@ -46,6 +39,8 @@ fun uriToFile(imageUri: Uri, context: Context): File {
     val buffer = ByteArray(1024)
     var length: Int
     while (inputStream.read(buffer).also { length = it } > 0) outputStream.write(buffer, 0, length)
+    outputStream.close()
+    inputStream.close()
     return myFile
 }
 

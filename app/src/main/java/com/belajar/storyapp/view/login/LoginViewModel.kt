@@ -1,4 +1,4 @@
-package com.belajar.storyapp
+package com.belajar.storyapp.view.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -9,9 +9,10 @@ import com.belajar.storyapp.data.model.DataModel
 import com.belajar.storyapp.helper.Result
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val storyRepository: StoryRepository): ViewModel() {
+class LoginViewModel(private val storyRepository: StoryRepository) : ViewModel() {
 
-    fun postLogin(email: String, password: String): LiveData<Result<LoginResponse>> = storyRepository.postLogin(email, password)
+    fun postLogin(email: String, password: String): LiveData<Result<LoginResponse>> =
+        storyRepository.postLogin(email, password)
 
     fun saveData(dataModel: DataModel) {
         viewModelScope.launch {

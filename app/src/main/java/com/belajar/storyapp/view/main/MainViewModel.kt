@@ -1,4 +1,4 @@
-package com.belajar.storyapp
+package com.belajar.storyapp.view.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
