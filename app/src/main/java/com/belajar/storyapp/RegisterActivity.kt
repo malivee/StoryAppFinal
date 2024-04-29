@@ -19,6 +19,7 @@ import com.belajar.storyapp.databinding.ActivityRegisterBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
 import com.belajar.storyapp.helper.isValidEmail
+import com.belajar.storyapp.helper.showLoading
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -56,7 +57,6 @@ class RegisterActivity : AppCompatActivity() {
                     Pair(binding.imgLogo, "logo"),
                     Pair(binding.edRegPassword, "text"),
                     Pair(binding.btnRegGuest, "submit")
-
                 )
             startActivity(intent, optionsCompat.toBundle())
         }
@@ -73,10 +73,16 @@ class RegisterActivity : AppCompatActivity() {
                             binding.emailEditReg.setBackgroundResource(R.drawable.text_edit_error)
                             binding.passwordEditReg.setBackgroundResource(R.drawable.text_edit_error)
                             binding.tvError.visibility = View.VISIBLE
+                            showLoading(false, binding.progressBar)
+
                         }
 
-                        Result.Loading -> {}
+                        Result.Loading -> {
+                            showLoading(true, binding.progressBar)
+
+                        }
                         is Result.Success -> {
+                            showLoading(false, binding.progressBar)
                             buttonDisabled()
                             Toast.makeText(
                                 this@RegisterActivity,

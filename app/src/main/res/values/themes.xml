@@ -8,7 +8,9 @@
 
     <style name="Theme.StoryApp" parent="Base.Theme.StoryApp" />
 
-    <style name="Theme.StoryApp.ActionBar" parent="Theme.Material3.DayNight" />
+    <style name="Theme.StoryApp.ActionBar" parent="Theme.Material3.DayNight" >
+        <item name="colorAccent">@color/orange</item>
+    </style>
 
     <style name="Theme.StoryApp.Fullscreen" parent="Theme.StoryApp">
         <item name="android:actionBarStyle">@style/Widget.Theme.StoryApp.ActionBar.Fullscreen</item>

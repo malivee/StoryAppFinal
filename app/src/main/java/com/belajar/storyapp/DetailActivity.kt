@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.belajar.storyapp.databinding.ActivityDetailBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
+import com.belajar.storyapp.helper.showLoading
 import com.belajar.storyapp.helper.toDateFormat
 import com.bumptech.glide.Glide
 
@@ -52,17 +53,20 @@ class DetailActivity : AppCompatActivity() {
             viewModel.getDetailStory(id).observe(this) {
                 if (it != null) {
                     when (it) {
-                        is Result.Failure -> Toast.makeText(
-                            this@DetailActivity,
-                            "Failed",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        is Result.Failure -> {
+                            Toast.makeText(
+                                this@DetailActivity,
+                                getString(R.string.error_get_story),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            showLoading(false, binding.progressBar)
+                        }
 
-                        Result.Loading -> {}
+                        Result.Loading -> {
+                            showLoading(true, binding.progressBar)
+                        }
                         is Result.Success -> {
-                            binding.apply {
-
-                            }
+                            showLoading(false, binding.progressBar)
                             Glide.with(this)
                                 .load(it.data.story?.photoUrl)
                                 .into(binding.imgDetailPhoto)

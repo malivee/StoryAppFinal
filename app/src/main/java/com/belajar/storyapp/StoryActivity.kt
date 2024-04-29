@@ -30,6 +30,7 @@ import com.belajar.storyapp.databinding.ActivityStoryBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
 import com.belajar.storyapp.helper.reduceFileImage
+import com.belajar.storyapp.helper.showLoading
 import com.belajar.storyapp.helper.uriToFile
 import com.yalantis.ucrop.UCrop
 import okhttp3.MediaType.Companion.toMediaType
@@ -124,14 +125,20 @@ class StoryActivity : AppCompatActivity() {
                 viewModel.postStory(multipartBody, requestBody).observe(this) {
                     if (it != null) {
                         when (it) {
-                            is Result.Failure -> Toast.makeText(
-                                this@StoryActivity,
-                                getString(R.string.error_post_story),
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            is Result.Failure -> {
+                                Toast.makeText(
+                                    this@StoryActivity,
+                                    getString(R.string.error_post_story),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                showLoading(false, binding.progressBar)
+                            }
 
-                            Result.Loading -> {}
+                            Result.Loading -> {
+                                showLoading(true, binding.progressBar)
+                            }
                             is Result.Success -> {
+                                showLoading(false, binding.progressBar)
 //                                    if (token == null) {
 //                                        val intent =
 //                                            Intent(this@StoryActivity, MainActivity::class.java)
@@ -190,14 +197,20 @@ class StoryActivity : AppCompatActivity() {
                 viewModel.postStoryGuest(multipartBody, requestBody).observe(this@StoryActivity) {
                     if (it != null) {
                         when (it) {
-                            is Result.Failure -> Toast.makeText(
-                                this@StoryActivity,
-                                getString(R.string.error_post_story),
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            is Result.Failure -> {
+                                Toast.makeText(
+                                    this@StoryActivity,
+                                    getString(R.string.error_post_story),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                showLoading(false, binding.progressBar)
+                            }
 
-                            Result.Loading -> {}
+                            Result.Loading -> {
+                                showLoading(true, binding.progressBar)
+                            }
                             is Result.Success -> {
+                                showLoading(false, binding.progressBar)
                                 val intent =
                                     Intent(this@StoryActivity, MainActivity::class.java)
                                 val optionsCompat : ActivityOptionsCompat =

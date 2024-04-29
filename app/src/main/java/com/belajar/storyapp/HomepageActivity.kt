@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.belajar.storyapp.databinding.ActivityHomepageBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
+import com.belajar.storyapp.helper.showLoading
 
 class HomepageActivity : AppCompatActivity() {
 
@@ -69,14 +70,20 @@ class HomepageActivity : AppCompatActivity() {
         viewModel.getStories().observe(this) {
             if (it != null) {
                 when (it) {
-                    is Result.Failure -> Toast.makeText(
-                        this@HomepageActivity,
-                        getString(R.string.error_get_story),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    is Result.Failure -> {
+                        showLoading(false, binding.progressBar)
+                        Toast.makeText(
+                            this@HomepageActivity,
+                            getString(R.string.error_get_story),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
 
-                    Result.Loading -> {}
+                    Result.Loading -> {
+                        showLoading(true, binding.progressBar)
+                    }
                     is Result.Success -> {
+                        showLoading(false, binding.progressBar)
                         it.let {
                             adapter.submitList(it.data.listStory.orEmpty().mapNotNull { it })
 

@@ -22,6 +22,7 @@ import com.belajar.storyapp.databinding.ActivityLoginBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
 import com.belajar.storyapp.helper.isValidEmail
+import com.belajar.storyapp.helper.showLoading
 
 class LoginActivity : AppCompatActivity() {
 
@@ -92,9 +93,13 @@ class LoginActivity : AppCompatActivity() {
                             binding.emailEditLog.setBackgroundResource(R.drawable.text_edit_error)
                             binding.passwordEditLog.setBackgroundResource(R.drawable.text_edit_error)
                             binding.tvError.visibility = View.VISIBLE
+                            showLoading(false, binding.progressBar)
                         }
-                        Result.Loading -> {}
+                        Result.Loading -> {
+                            showLoading(true, binding.progressBar)
+                        }
                         is Result.Success -> {
+                            showLoading(false, binding.progressBar)
                             val token = it.data.loginResult?.token.toString()
                             val name = it.data.loginResult?.name.toString()
                             viewModel.saveData(DataModel(
