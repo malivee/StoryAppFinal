@@ -6,6 +6,7 @@
 - Login & Register Page
 - Detail page
 - Page that contains stories
+- Add story page & guest posting
 
 ## Overview 
 <img src="https://github.com/malivee/StoryAppInitial/assets/100111548/4025ac23-d1d1-4ca4-9151-d95b28f6db01" width="200"> 
