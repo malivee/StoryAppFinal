@@ -37,7 +37,6 @@
         <activity
             android:name=".view.story.StoryActivity"
             android:exported="false"
-            android:parentActivityName=".view.home.HomepageActivity"
             android:theme="@style/Theme.StoryApp.ActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity

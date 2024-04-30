@@ -76,7 +76,6 @@ class StoryActivity : AppCompatActivity() {
                 } else {
                     setHomeButtonEnabled(true)
                     setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
-//            setBackgroundDrawable(ColorDrawable(getColor(R.color.dark_blue)))
                     setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 }
             }
@@ -121,11 +120,11 @@ class StoryActivity : AppCompatActivity() {
             val requestBody = description.toRequestBody("text/plain".toMediaType())
             val requestImageFile = imageFile?.asRequestBody("image/jpeg".toMediaType())
 
-            val multipartBody = requestImageFile?.let { imageFile ->
+            val multipartBody = requestImageFile?.let { file ->
                 MultipartBody.Part.createFormData(
                     "photo",
                     description,
-                    imageFile
+                    file
                 )
             }
 
@@ -175,53 +174,51 @@ class StoryActivity : AppCompatActivity() {
 
     private fun postStoryGuest() {
         currentImageUri?.let {
-            val imageFile = it?.let { uri -> uriToFile(uri, this@StoryActivity) }
+            val imageFile = uriToFile(it, this@StoryActivity)
             val description = binding.edAddDescription.text.toString()
 
             val requestBody = description.toRequestBody("text/plain".toMediaType())
-            val requestImageFile = imageFile?.asRequestBody("image/jpeg".toMediaType())
+            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
 
-            val multipartBody = requestImageFile?.let { imageFile ->
+            val multipartBody =
                 MultipartBody.Part.createFormData(
                     "photo",
                     description,
-                    imageFile
+                    requestImageFile
                 )
-            }
-            if (multipartBody != null) {
-                viewModel.postStoryGuest(multipartBody, requestBody).observe(this@StoryActivity) {
-                    if (it != null) {
-                        when (it) {
-                            is Result.Failure -> {
-                                Toast.makeText(
-                                    this@StoryActivity,
-                                    getString(R.string.error_post_story),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                showLoading(false, binding.progressBar)
-                            }
 
-                            Result.Loading -> {
-                                showLoading(true, binding.progressBar)
-                            }
+            viewModel.postStoryGuest(multipartBody, requestBody).observe(this@StoryActivity) {
+                if (it != null) {
+                    when (it) {
+                        is Result.Failure -> {
+                            Toast.makeText(
+                                this@StoryActivity,
+                                getString(R.string.error_post_story),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            showLoading(false, binding.progressBar)
+                        }
 
-                            is Result.Success -> {
-                                showLoading(false, binding.progressBar)
-                                val intent =
-                                    Intent(this@StoryActivity, MainActivity::class.java)
-                                val optionsCompat: ActivityOptionsCompat =
-                                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                        this@StoryActivity,
-                                        Pair(binding.imgStoryPhoto, "logo")
-                                    )
-                                startActivity(intent, optionsCompat.toBundle())
-                                finish()
-                                Toast.makeText(
+                        Result.Loading -> {
+                            showLoading(true, binding.progressBar)
+                        }
+
+                        is Result.Success -> {
+                            showLoading(false, binding.progressBar)
+                            val intent =
+                                Intent(this@StoryActivity, MainActivity::class.java)
+                            val optionsCompat: ActivityOptionsCompat =
+                                ActivityOptionsCompat.makeSceneTransitionAnimation(
                                     this@StoryActivity,
-                                    it.data.message,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
+                                    Pair(binding.imgStoryPhoto, "logo")
+                                )
+                            startActivity(intent, optionsCompat.toBundle())
+                            finish()
+                            Toast.makeText(
+                                this@StoryActivity,
+                                it.data.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }

@@ -12,13 +12,13 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.belajar.storyapp.view.home.HomepageActivity
-import com.belajar.storyapp.view.login.LoginActivity
 import com.belajar.storyapp.R
-import com.belajar.storyapp.view.register.RegisterActivity
-import com.belajar.storyapp.view.story.StoryActivity
 import com.belajar.storyapp.databinding.ActivityMainBinding
 import com.belajar.storyapp.helper.ViewModelFactory
+import com.belajar.storyapp.view.home.HomepageActivity
+import com.belajar.storyapp.view.login.LoginActivity
+import com.belajar.storyapp.view.register.RegisterActivity
+import com.belajar.storyapp.view.story.StoryActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,11 +44,6 @@ class MainActivity : AppCompatActivity() {
         val viewModel : MainViewModel by viewModels { viewModelFactory }
 
         viewModel.getLoginData().observe(this) {
-            val loginState = it.isLogin
-            val token = it.token
-            val name = it.name
-            Log.d("LOGINSTATE", loginState.toString())
-            Log.d("TOKENSTATE", token.toString())
 
             if (it.isLogin) {
                 val intent = Intent(this@MainActivity, HomepageActivity::class.java)

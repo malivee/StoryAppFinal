@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
-import com.belajar.storyapp.view.detail.DetailActivity
 import com.belajar.storyapp.data.api.response.ListStoryItem
 import com.belajar.storyapp.databinding.ItemStoriesBinding
 import com.belajar.storyapp.helper.toDateFormat
+import com.belajar.storyapp.view.detail.DetailActivity
 import com.bumptech.glide.Glide
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {

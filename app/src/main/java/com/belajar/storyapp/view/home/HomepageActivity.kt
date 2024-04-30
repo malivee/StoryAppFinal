@@ -17,12 +17,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.belajar.storyapp.R
-import com.belajar.storyapp.view.setting.SettingActivity
-import com.belajar.storyapp.view.story.StoryActivity
 import com.belajar.storyapp.databinding.ActivityHomepageBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
 import com.belajar.storyapp.helper.showLoading
+import com.belajar.storyapp.view.setting.SettingActivity
+import com.belajar.storyapp.view.story.StoryActivity
 
 class HomepageActivity : AppCompatActivity() {
 

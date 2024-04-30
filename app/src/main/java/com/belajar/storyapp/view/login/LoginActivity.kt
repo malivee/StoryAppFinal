@@ -16,8 +16,6 @@ import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.belajar.storyapp.R
-import com.belajar.storyapp.view.register.RegisterActivity
-import com.belajar.storyapp.view.story.StoryActivity
 import com.belajar.storyapp.data.model.DataModel
 import com.belajar.storyapp.databinding.ActivityLoginBinding
 import com.belajar.storyapp.helper.Result
@@ -25,6 +23,8 @@ import com.belajar.storyapp.helper.ViewModelFactory
 import com.belajar.storyapp.helper.isValidEmail
 import com.belajar.storyapp.helper.showLoading
 import com.belajar.storyapp.view.home.HomepageActivity
+import com.belajar.storyapp.view.register.RegisterActivity
+import com.belajar.storyapp.view.story.StoryActivity
 
 class LoginActivity : AppCompatActivity() {
 

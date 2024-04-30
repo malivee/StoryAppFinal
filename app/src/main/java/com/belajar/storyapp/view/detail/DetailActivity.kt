@@ -14,12 +14,12 @@ import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.belajar.storyapp.R
-import com.belajar.storyapp.view.story.StoryActivity
 import com.belajar.storyapp.databinding.ActivityDetailBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
 import com.belajar.storyapp.helper.showLoading
 import com.belajar.storyapp.helper.toDateFormat
+import com.belajar.storyapp.view.story.StoryActivity
 import com.bumptech.glide.Glide
 
 class DetailActivity : AppCompatActivity() {
