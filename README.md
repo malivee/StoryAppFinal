@@ -15,3 +15,5 @@
 <img src="https://github.com/malivee/StoryAppInitial/assets/100111548/2f9667de-f021-4ea8-bc45-27bbe60f5776" width="200">
 <img src="https://github.com/malivee/StoryAppInitial/assets/100111548/6b3ecb60-c6cb-497a-a592-483416c4314e" width="200">
 <img src="https://github.com/malivee/StoryAppInitial/assets/100111548/20ea62e7-3893-4172-a071-eca7b1b7b762" width="200">
+<img src="https://github.com/malivee/StoryAppInitial/assets/100111548/e76b0389-c251-4687-bcc8-c0fe703ae0f0" width="200">
+
