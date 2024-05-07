@@ -54,32 +54,33 @@ class HomepageActivity : AppCompatActivity() {
         binding.rvStory.layoutManager = layoutManager
 
 
-        viewModel.getStories().observe(this) {
-            if (it != null) {
-                when (it) {
-                    is Result.Failure -> {
-                        showLoading(false, binding.progressBar)
-                        Toast.makeText(
-                            this@HomepageActivity,
-                            getString(R.string.error_get_story),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-
-                    Result.Loading -> {
-                        showLoading(true, binding.progressBar)
-                    }
-
-                    is Result.Success -> {
-                        showLoading(false, binding.progressBar)
-                        it.let {
-                            adapter.submitList(it.data.listStory.orEmpty().mapNotNull { it })
-
-                        }
-                    }
-
-                }
-            }
+        viewModel.stories.observe(this) {
+            adapter.submitData(lifecycle, it)
+//            if (it != null) {
+//                when (it) {
+//                    is Result.Failure -> {
+//                        showLoading(false, binding.progressBar)
+//                        Toast.makeText(
+//                            this@HomepageActivity,
+//                            getString(R.string.error_get_story),
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }
+//
+//                    Result.Loading -> {
+//                        showLoading(true, binding.progressBar)
+//                    }
+//
+//                    is Result.Success -> {
+//                        showLoading(false, binding.progressBar)
+//                        it.let {
+//                            adapter.submitList(it.data.listStory.orEmpty().mapNotNull { it })
+//
+//                        }
+//                    }
+//
+//                }
+//            }
 
         }
 

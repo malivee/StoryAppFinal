@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
 
 }
 
@@ -31,16 +32,19 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+        freeCompilerArgs = (freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn").toMutableList()
+
     }
 
-    buildFeatures { 
+    buildFeatures {
         viewBinding = true
         buildConfig = true
+
     }
 }
 
@@ -80,5 +84,10 @@ dependencies {
     implementation("androidx.camera:camera-camera2:1.3.3")
     implementation("androidx.camera:camera-lifecycle:1.3.3")
     implementation("androidx.camera:camera-view:1.3.3")
+
+    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
+    implementation("androidx.room:room-paging:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 
 }
