@@ -129,13 +129,15 @@ fun getStories(): LiveData<PagingData<ListStoryItem>> {
 
     fun postStory(
         multipartBody: MultipartBody.Part,
-        description: RequestBody
+        description: RequestBody,
+        lat: RequestBody,
+        lon: RequestBody
     ): LiveData<Result<UploadResponse>> = liveData {
         emit(Result.Loading)
 
 
         try {
-            val client = apiService.postStory(multipartBody, description)
+            val client = apiService.postStory(multipartBody, description, lat, lon)
             if (client.error == false) {
                 emit(Result.Success(client))
             } else {
@@ -151,12 +153,14 @@ fun getStories(): LiveData<PagingData<ListStoryItem>> {
 
     fun postStoryGuest(
         multipartBody: MultipartBody.Part,
-        description: RequestBody
+        description: RequestBody,
+        lat: RequestBody,
+        lon: RequestBody
     ): LiveData<Result<UploadResponse>> = liveData {
         emit(Result.Loading)
 
         try {
-            val client = apiService.postStoryGuest(multipartBody, description)
+            val client = apiService.postStoryGuest(multipartBody, description, lat, lon)
             if (client.error == false) {
                 emit(Result.Success(client))
             } else {

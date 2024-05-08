@@ -41,7 +41,7 @@
 
 
         <ImageView
-            android:id="@+id/avatar_detail"
+            android:id="@+id/img_location"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
@@ -62,8 +62,8 @@
             android:gravity="center"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/avatar_detail"
-            app:layout_constraintTop_toTopOf="@id/avatar_detail"
+            app:layout_constraintStart_toEndOf="@+id/img_location"
+            app:layout_constraintTop_toTopOf="@id/img_location"
             tools:text="@tools:sample/lorem" />
 
 
@@ -91,7 +91,7 @@
             android:layout_marginHorizontal="16dp"
             android:fontFamily="sans-serif-condensed-light"
             android:textSize="11sp"
-            app:layout_constraintStart_toEndOf="@+id/avatar_detail"
+            app:layout_constraintStart_toEndOf="@+id/img_location"
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_name"
             tools:text="@tools:sample/lorem" />
 

@@ -51,4 +51,10 @@
     <string name="language_available">Only available in English (US) and Indonesian</string>
     <string name="cta_story">Create your story now!</string>
     <string name="cta_story_title">Interested to make your own story? Start now</string>
+    <string name="title_activity_maps" translatable="false">MapsActivity</string>
+
+    <string name="marker">Marker: %1$.6f, %2$.6f</string>
+    <string name="position">Your Position: %1$.6f, %2$.6f</string>
+    <string name="lat_long">Lat: %1$.6f, Long: %2$.6f</string>
+
 </resources>

@@ -48,6 +48,22 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/img_story_photo" />
 
+    <Button
+        android:id="@+id/btn_maps"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/cyan"
+        android:drawableEnd="@drawable/baseline_location_on_24"
+        android:text="Post with a map"
+        android:padding="16dp"
+        android:textColor="@color/white"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_camera" />
+
     <com.belajar.storyapp.customview.ButtonOutline
         android:id="@+id/btn_camera"
         android:layout_width="0dp"
@@ -68,6 +84,28 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_location_on_24"
+        android:background="@color/dark_blue"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_lat_lng"
+        app:layout_constraintTop_toTopOf="@id/tv_lat_lng"
+        app:layout_constraintBottom_toBottomOf="@id/tv_lat_lng"/>
+
+    <TextView
+        android:id="@+id/tv_lat_lng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@tools:sample/lorem"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/btn_maps"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_field"
@@ -76,7 +114,7 @@
         android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_gallery"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lat_lng"
         app:layout_constraintBottom_toTopOf="@+id/button_add">
 
 

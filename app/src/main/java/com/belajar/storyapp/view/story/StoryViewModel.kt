@@ -13,9 +13,11 @@ import okhttp3.RequestBody
 class StoryViewModel(private val storyRepository: StoryRepository) : ViewModel() {
     fun postStory(
         multipartBody: MultipartBody.Part,
-        description: RequestBody
+        description: RequestBody,
+        lat: RequestBody,
+        lon: RequestBody
     ): LiveData<Result<UploadResponse>> =
-        storyRepository.postStory(multipartBody, description)
+        storyRepository.postStory(multipartBody, description, lat, lon)
 
     fun getLoginData(): LiveData<DataModel> {
         return storyRepository.getData().asLiveData()
@@ -23,8 +25,10 @@ class StoryViewModel(private val storyRepository: StoryRepository) : ViewModel()
 
     fun postStoryGuest(
         multipartBody: MultipartBody.Part,
-        description: RequestBody
+        description: RequestBody,
+        lat: RequestBody,
+        lon: RequestBody
     ): LiveData<Result<UploadResponse>> =
-        storyRepository.postStoryGuest(multipartBody, description)
+        storyRepository.postStoryGuest(multipartBody, description, lat, lon)
 
 }
