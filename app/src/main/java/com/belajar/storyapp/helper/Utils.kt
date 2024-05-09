@@ -1,11 +1,13 @@
 package com.belajar.storyapp.helper
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.view.View
 import android.widget.ProgressBar
+import androidx.core.content.ContextCompat
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -69,4 +71,9 @@ fun showLoading(isLoading: Boolean, loadingView: ProgressBar) {
     loadingView.visibility = if (isLoading) View.VISIBLE else View.GONE
 }
 
+fun checkPermissions(context: Context, permission: String): Boolean {
+    return ContextCompat.checkSelfPermission(
+        context, permission
+    ) == PackageManager.PERMISSION_GRANTED
+}
 

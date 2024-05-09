@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -113,13 +114,8 @@ class StoryActivity : AppCompatActivity() {
         }
 
         binding.btnMaps.setOnClickListener {
-            if (!getMyCurrentLocation()) {
-                requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-            } else {
                 val intent = Intent(this, MapsActivity::class.java)
                 mapsActivityLauncher.launch(intent)
-//                startActivity(intent)
-            }
         }
     }
     
@@ -130,22 +126,11 @@ class StoryActivity : AppCompatActivity() {
             latitude = it.data?.getStringExtra(MapsActivity.EXTRA_LAT)
             longitude = it.data?.getStringExtra(MapsActivity.EXTRA_LNG)
 
-            binding.tvLatLng.text = latitude + ", " + longitude
+            binding.tvLatLng.text = String.format(getString(R.string.lat_long), latitude?.toFloat(), longitude?.toFloat())
         }
     }
     
-    private val requestLocationPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) {
-        if (it) {
-            getMyCurrentLocation()
-        }
-    }
 
-    private fun getMyCurrentLocation() = ContextCompat.checkSelfPermission(
-                this.applicationContext,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
         
 
     
@@ -356,11 +341,14 @@ class StoryActivity : AppCompatActivity() {
         viewModel.getLoginData().observe(this@StoryActivity) {
             if (it.isLogin) {
                 menuInflater.inflate(R.menu.option_menu, menu)
+                menu?.findItem(R.id.btn_map_option)?.apply {
+                    isVisible = false
+                }
 
             } else {
+                menu?.clear()
 
-                val settingItem = menu?.findItem(R.id.btn_setting)
-                settingItem?.icon?.setTint(ContextCompat.getColor(this, R.color.white))
+
             }
         }
         return super.onCreateOptionsMenu(menu)

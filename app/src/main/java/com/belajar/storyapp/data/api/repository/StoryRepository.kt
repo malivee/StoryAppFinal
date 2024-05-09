@@ -174,6 +174,18 @@ fun getStories(): LiveData<PagingData<ListStoryItem>> {
         }
     }
 
+    fun getMapStories(): LiveData<Result<AllStoryResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val client = apiService.getMapStories(1)
+            emit(Result.Success(client))
+        } catch (e: Exception) {
+            emit(Result.Failure(e.message.toString()))
+            Log.e("GetMapStories", e.message.toString())
+        }
+
+    }
+
     suspend fun saveData(dataModel: DataModel) {
         authPreference.saveData(dataModel)
     }

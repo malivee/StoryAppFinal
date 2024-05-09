@@ -21,6 +21,7 @@ import com.belajar.storyapp.databinding.ActivityHomepageBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
 import com.belajar.storyapp.helper.showLoading
+import com.belajar.storyapp.view.maps.MapsActivity
 import com.belajar.storyapp.view.setting.SettingActivity
 import com.belajar.storyapp.view.story.StoryActivity
 
@@ -122,9 +123,18 @@ class HomepageActivity : AppCompatActivity() {
                     Pair(binding.imgLogo, "logo")
                 )
             startActivity(intent, optionsCompat.toBundle())
-
+        }
+        if (item.itemId == R.id.btn_map_option) {
+            val intent = Intent(this, MapsActivity::class.java)
+            val mapString = "mapString"
+            intent.putExtra(EXTRA_MAP, mapString)
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    companion object {
+        const val EXTRA_MAP ="extra_map"
     }
 
 }

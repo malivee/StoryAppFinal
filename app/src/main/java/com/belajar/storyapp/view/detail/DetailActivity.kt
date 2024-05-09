@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -19,12 +20,15 @@ import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
 import com.belajar.storyapp.helper.showLoading
 import com.belajar.storyapp.helper.toDateFormat
+import com.belajar.storyapp.view.maps.MapsActivity
 import com.belajar.storyapp.view.story.StoryActivity
 import com.bumptech.glide.Glide
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
+    private var latitude: Float? = null
+    private var longitude: Float? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -47,7 +51,6 @@ class DetailActivity : AppCompatActivity() {
         val viewModel: DetailViewModel by viewModels { viewModelFactory }
 
         val id = intent.getStringExtra(EXTRA_ID)
-        Log.d("IDDETAIL", id.toString())
 
         if (id != null) {
             viewModel.getDetailStory(id).observe(this) {
@@ -75,12 +78,33 @@ class DetailActivity : AppCompatActivity() {
                                 tvDetailName.text = it.data.story?.name
                                 tvDetailDescription.text = it.data.story?.description
                                 tvDetailDate.text = it.data.story?.createdAt?.toDateFormat()
+                                latitude = it.data.story?.lat
+                                longitude = it.data.story?.lon
+                                tvLatLng.text =
+                                    String.format(getString(R.string.lat_long), latitude, longitude)
+                            }
+                            if (latitude != null) {
+                                binding.tvLatLng.visibility = View.VISIBLE
+                                binding.imgLatLng.visibility = View.VISIBLE
+                                binding.tvLatLng.setOnClickListener {
+                                    val intent = Intent(this, MapsActivity::class.java)
+                                    intent.putExtra(EXTRA_LAT, latitude.toString())
+                                    intent.putExtra(EXTRA_LNG, longitude.toString())
+                                    startActivity(intent)
+                                }
+
+                                Log.d("LATITUDE", "$latitude")
+
+                            } else {
+                                binding.tvLatLng.text = getString(R.string.no_location)
                             }
                         }
                     }
                 }
             }
         }
+
+
 
         binding.btnCta.setOnClickListener {
             val intent = Intent(this, StoryActivity::class.java)
@@ -97,5 +121,7 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_ID = "extra_id"
+        const val EXTRA_LAT = "extra_lat"
+        const val EXTRA_LNG = "extra_lng"
     }
 }
