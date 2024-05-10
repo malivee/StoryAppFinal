@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,28 +12,31 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.belajar.storyapp.R
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.belajar.storyapp.data.api.response.ListStoryItem
 import com.belajar.storyapp.databinding.ActivityMapsBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
 import com.belajar.storyapp.helper.showLoading
 import com.belajar.storyapp.view.detail.DetailActivity
 import com.belajar.storyapp.view.home.HomepageActivity
+import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -202,35 +204,55 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                 }
                             }
 
-                            mMap.addMarker(
-                                MarkerOptions().apply {
-                                    title(item.name)
-                                    if (location != null) {
-                                        position(location)
-                                        latLngBounds.include(location)
+                            val markerOptions = MarkerOptions().apply {
+                                title(item.name)
+                                if (location != null) {
+                                    position(location)
+                                    latLngBounds.include(location)
+                                }
 
-                                    }
-                                    snippet(
-                                        String.format(
-                                            getString(R.string.lat_long),
-                                            item.lat,
-                                            item.lon
-                                        )
+                                snippet(
+                                    String.format(
+                                        getString(R.string.lat_long),
+                                        item.lat,
+                                        item.lon
                                     )
-                                    icon(
-                                        BitmapDescriptorFactory.defaultMarker(
-                                            BitmapDescriptorFactory.HUE_CYAN
-                                        )
-                                    )
+                                )
 
-                                    mMap.animateCamera(
-                                        CameraUpdateFactory.newLatLngBounds(
-                                            latLngBounds.build(),
-                                            64
-                                        )
+                                icon(
+                                    BitmapDescriptorFactory.defaultMarker(
+                                        BitmapDescriptorFactory.HUE_CYAN
                                     )
-                                })
+                                )
 
+                                mMap.animateCamera(
+                                    CameraUpdateFactory.newLatLngBounds(
+                                        latLngBounds.build(),
+                                        100
+                                    )
+                                )
+
+                            }
+
+                            marker = mMap.addMarker(markerOptions)
+                            marker?.tag = item
+
+                            mMap.setOnMarkerClickListener { markedClick ->
+                                val items = markedClick.tag as ListStoryItem
+                                val itemClickLocation = LatLng(items.lat!!, items.lon!!)
+                                binding.userDetail.root.visibility = View.VISIBLE
+                                binding.userDetail.tvName.text = items.name
+                                binding.userDetail.tvDesc.text = items.description
+                                Glide.with(this@MapsActivity)
+                                    .load(items.photoUrl)
+                                    .into(binding.userDetail.ivPhoto)
+                                mMap.animateCamera(CameraUpdateFactory.newLatLng(itemClickLocation))
+                                true
+                            }
+
+                            mMap.setOnMapClickListener {
+                                binding.userDetail.root.visibility = View.GONE
+                            }
 
                         }
 

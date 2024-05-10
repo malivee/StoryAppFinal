@@ -14,8 +14,8 @@ class StoryViewModel(private val storyRepository: StoryRepository) : ViewModel()
     fun postStory(
         multipartBody: MultipartBody.Part,
         description: RequestBody,
-        lat: RequestBody,
-        lon: RequestBody
+        lat: RequestBody? = null,
+        lon: RequestBody? = null
     ): LiveData<Result<UploadResponse>> =
         storyRepository.postStory(multipartBody, description, lat, lon)
 
@@ -26,8 +26,8 @@ class StoryViewModel(private val storyRepository: StoryRepository) : ViewModel()
     fun postStoryGuest(
         multipartBody: MultipartBody.Part,
         description: RequestBody,
-        lat: RequestBody,
-        lon: RequestBody
+        lat: RequestBody? = null,
+        lon: RequestBody? = null
     ): LiveData<Result<UploadResponse>> =
         storyRepository.postStoryGuest(multipartBody, description, lat, lon)
 

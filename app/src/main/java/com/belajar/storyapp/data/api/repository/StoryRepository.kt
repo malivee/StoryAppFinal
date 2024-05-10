@@ -105,8 +105,8 @@ class StoryRepository private constructor(
     fun postStory(
         multipartBody: MultipartBody.Part,
         description: RequestBody,
-        lat: RequestBody,
-        lon: RequestBody
+        lat: RequestBody? = null,
+        lon: RequestBody? = null
     ): LiveData<Result<UploadResponse>> = liveData {
         emit(Result.Loading)
 
@@ -129,8 +129,8 @@ class StoryRepository private constructor(
     fun postStoryGuest(
         multipartBody: MultipartBody.Part,
         description: RequestBody,
-        lat: RequestBody,
-        lon: RequestBody
+        lat: RequestBody? = null,
+        lon: RequestBody? = null
     ): LiveData<Result<UploadResponse>> = liveData {
         emit(Result.Loading)
 
