@@ -7,11 +7,11 @@ plugins {
 
 }
 
+@Suppress("UnstableApiUsage")
 android {
     namespace = "com.belajar.storyapp"
     compileSdk = 34
 
-    @Suppress("UnstableApiUsage")
     testOptions {
         unitTests.isReturnDefaultValues = true
         }
@@ -44,7 +44,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
-        freeCompilerArgs = (freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn").toMutableList()
+        freeCompilerArgs = (freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn").toMutableList()
 
     }
 
@@ -60,6 +60,9 @@ android {
 
         ignoreList.add("keyToIgnore")
         ignoreList.add("sdk.*")
+    }
+    testOptions {
+        animationsDisabled = true
     }
 
 }
@@ -113,6 +116,15 @@ dependencies {
 
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.inline)
+
+    debugImplementation("androidx.fragment:fragment-testing:1.7.0")
+
+    androidTestImplementation("androidx.arch.core:core-testing:2.2.0") // InstantTaskExecutorRule
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1") //TestDispatcher
+
+    implementation("androidx.test.espresso:espresso-idling-resource:3.5.1")
+
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")//IntentsTestRule
 
 
 }

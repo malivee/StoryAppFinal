@@ -116,9 +116,7 @@ class LoginActivity : AppCompatActivity() {
                                 )
                             )
                             val intent = Intent(this@LoginActivity, HomepageActivity::class.java)
-                            intent.flags =
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                            Log.i("TOKEN", token)
+//
                             val optionsCompat: ActivityOptionsCompat =
                                 ActivityOptionsCompat.makeSceneTransitionAnimation(
                                     this@LoginActivity,

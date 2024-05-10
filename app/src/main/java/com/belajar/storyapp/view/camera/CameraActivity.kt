@@ -141,6 +141,7 @@ class CameraActivity : AppCompatActivity() {
                         this@CameraActivity,
                         getString(R.string.camera_capture_error), Toast.LENGTH_SHORT
                     ).show()
+                    Log.e("CameraCapture", exception.message.toString())
                 }
 
             }
