@@ -11,6 +11,12 @@ android {
     namespace = "com.belajar.storyapp"
     compileSdk = 34
 
+    @Suppress("UnstableApiUsage")
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+        }
+
+
     defaultConfig {
         applicationId = "com.belajar.storyapp"
         minSdk = 24
@@ -108,6 +114,12 @@ dependencies {
 
     implementation("com.google.android.gms:play-services-location:18.0.0")
     implementation(libs.play.services.maps)
+
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
+
+    testImplementation("org.mockito:mockito-core:3.12.4")
+    testImplementation("org.mockito:mockito-inline:3.12.4")
 
 
 }

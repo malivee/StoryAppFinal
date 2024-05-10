@@ -58,5 +58,6 @@
     <string name="lat_long">Lat: %1$.6f, Long: %2$.6f</string>
     <string name="open_map">Open map from this location</string>
     <string name="no_location">No location Set For This Story</string>
+    <string name="retry">Retry</string>
 
 </resources>

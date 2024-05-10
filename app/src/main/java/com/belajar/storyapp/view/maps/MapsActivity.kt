@@ -32,7 +32,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.belajar.storyapp.databinding.ActivityMapsBinding
 import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
-import com.belajar.storyapp.helper.checkPermissions
+import com.belajar.storyapp.helper.showLoading
 import com.belajar.storyapp.view.camera.CameraActivity
 import com.belajar.storyapp.view.detail.DetailActivity
 import com.belajar.storyapp.view.home.HomepageActivity
@@ -127,7 +127,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 ?.let { mMap.animateCamera(it) }
         } else if (storiesMap != null) {
             getMapStories()
-            binding.hintOverlay.root.visibility = View.GONE
+            binding.hintOverlay.tvHint.text = "Location of posted stories"
         } else {
 //            val sydney = LatLng(-34.0, 151.0)
 //            mMap.addMarker(MarkerOptions().position(sydney).title("Current Location"))
@@ -266,9 +266,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapsViewModel.getMapStories().observe(this) {
             if (it != null) {
                 when (it) {
-                    is Result.Failure -> {}
-                    Result.Loading -> {}
+                    is Result.Failure -> {
+                        showLoading(false, binding.progressBar)
+                        Toast.makeText(this, "Failed to show the result, please try again", Toast.LENGTH_SHORT).show()
+
+                    }
+                    Result.Loading -> {
+                        showLoading(true, binding.progressBar)
+                    }
                     is Result.Success -> {
+                        showLoading(true, binding.progressBar)
                         it.data.listStory?.forEach { item ->
                             val location = item.lat?.let { lat ->
                                 item.lon?.let { lon ->
@@ -379,6 +386,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 binding.overlayMap.tvCoordinate.text = snippet
                 binding.overlayMap.tvLocationName.text = title
                 binding.overlayMap.root.visibility = View.VISIBLE
+
+                binding.overlayMap.btnConfirm.setOnClickListener {
+                    val intent = Intent()
+                    intent.putExtra(EXTRA_LAT, location.latitude.toString())
+                    intent.putExtra(EXTRA_LNG, location.longitude.toString())
+                    setResult(EXTRA_RESULT, intent)
+                    finish()
+                }
             }
         )
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))

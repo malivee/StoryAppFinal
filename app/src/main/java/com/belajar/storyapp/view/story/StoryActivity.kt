@@ -205,7 +205,7 @@ class StoryActivity : AppCompatActivity() {
 
     private fun postStoryGuest() {
         currentImageUri?.let {
-            val imageFile = uriToFile(it, this@StoryActivity)
+            val imageFile = uriToFile(it, this@StoryActivity).reduceFileImage()
             val description = binding.edAddDescription.text.toString()
 
             val requestBodyDesc = description.toRequestBody("text/plain".toMediaType())

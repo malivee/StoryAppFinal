@@ -51,7 +51,11 @@ class HomepageActivity : AppCompatActivity() {
 
         val adapter = HomeAdapter()
         val layoutManager = LinearLayoutManager(this)
-        binding.rvStory.adapter = adapter
+        binding.rvStory.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
         binding.rvStory.layoutManager = layoutManager
 
 

@@ -87,7 +87,7 @@
         android:id="@+id/tv_lat_lng"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@tools:sample/lorem"
+        android:text="No location is set yet"
         android:fontFamily="sans-serif-condensed-medium"
         android:textStyle="bold"
         android:textSize="14sp"
