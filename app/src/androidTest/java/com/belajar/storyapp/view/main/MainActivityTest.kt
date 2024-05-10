@@ -1,6 +1,5 @@
 package com.belajar.storyapp.view.main
 
-import android.Manifest
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.intent.Intents
 import androidx.test.ext.junit.rules.ActivityScenarioRule
@@ -21,7 +20,6 @@ import androidx.test.espresso.intent.Intents.release
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.belajar.storyapp.R
-import androidx.test.rule.GrantPermissionRule
 import com.belajar.storyapp.view.home.HomepageActivity
 
 @RunWith(AndroidJUnit4::class)
