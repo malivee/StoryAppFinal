@@ -42,4 +42,23 @@
     <string name="language_available">"Hanya tersedia dalam bahasa Inggris (AS) dan Indonesia "</string>
     <string name="cta_story">Buat storymu sekarang!</string>
     <string name="cta_story_title">Tertarik untuk membuat storymu sendiri?</string>
+    <string name="position">Posisimu: %1$.6f, %2$.6f</string>
+    <string name="open_map">Buka map dari lokasi ini</string>
+    <string name="no_location">Tidak ada lokasi untuk story ini</string>
+    <string name="posted_location">Lokasi dari story-story orang</string>
+    <string name="current_location">Lokasi saat ini</string>
+    <string name="map_error">Gagal untuk menampilkan hasil, coba lagi</string>
+    <string name="error_map_access">Tidak bisa mengakses lokasi, coba lagi</string>
+    <string name="retry">Coba lagi</string>
+    <string name="capture_image_content_desc">Tangkap gambar</string>
+    <string name="switch_camera_content_desc">Ganti Kamera</string>
+    <string name="photo_posted_content_desc">Foto yang diposting pengguna</string>
+    <string name="photo_uploaded_content_desc">Foto yang diupload</string>
+    <string name="location_symbol_content_desc">Simbol lokasi</string>
+    <string name="no_location_set">Lokasi belum di atur</string>
+    <string name="post_with_map">Posting dengan lokasi</string>
+    <string name="choose_location">Pilih lokasi yang diingingkan</string>
+    <string name="confirm_location">Ingin menggunakan lokasi ini?</string>
+    <string name="confirm">Konfirmasi</string>
+    <string name="story_location">Lokasi dari story ini</string>
 </resources>

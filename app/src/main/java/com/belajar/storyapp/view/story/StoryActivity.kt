@@ -111,7 +111,9 @@ class StoryActivity : AppCompatActivity() {
 
         binding.btnMaps.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)
-            mapsActivityLauncher.launch(intent)
+            val transition = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
+
+            mapsActivityLauncher.launch(intent, transition)
         }
     }
 

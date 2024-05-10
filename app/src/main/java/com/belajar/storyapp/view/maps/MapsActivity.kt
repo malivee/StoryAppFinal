@@ -80,7 +80,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val storiesMap = intent?.getStringExtra(HomepageActivity.EXTRA_MAP)
 
         if (latDetail != null) {
-            binding.hintOverlay.root.visibility = View.GONE
+            binding.hintOverlay.tvHint.text = getString(R.string.story_location)
             val location = lngDetail?.toDouble()?.let { LatLng(latDetail.toDouble(), it) }
             location?.let {
                 MarkerOptions().position(it).title(getString(R.string.current_location))

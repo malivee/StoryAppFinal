@@ -93,7 +93,8 @@ class HomepageActivity : AppCompatActivity() {
             val intent = Intent(this, MapsActivity::class.java)
             val mapString = "mapString"
             intent.putExtra(EXTRA_MAP, mapString)
-            startActivity(intent)
+            val transition = ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle()
+            startActivity(intent, transition)
         }
         return super.onOptionsItemSelected(item)
     }

@@ -89,7 +89,8 @@ class DetailActivity : AppCompatActivity() {
                                     val intent = Intent(this, MapsActivity::class.java)
                                     intent.putExtra(EXTRA_LAT, latitude.toString())
                                     intent.putExtra(EXTRA_LNG, longitude.toString())
-                                    startActivity(intent)
+                                    val transition = ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle()
+                                    startActivity(intent, transition)
                                 }
 
                             } else {
@@ -100,8 +101,6 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
         }
-
-
 
         binding.btnCta.setOnClickListener {
             val intent = Intent(this, StoryActivity::class.java)
