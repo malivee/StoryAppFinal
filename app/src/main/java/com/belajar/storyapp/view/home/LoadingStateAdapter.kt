@@ -8,12 +8,15 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.belajar.storyapp.databinding.LoadingStatePagingBinding
 
-class LoadingStateAdapter(private val retry: () -> Unit): LoadStateAdapter<LoadingStateAdapter.ViewHolder>() {
-    class ViewHolder(private val binding: LoadingStatePagingBinding, retry: () -> Unit): RecyclerView.ViewHolder(binding.root) {
+class LoadingStateAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<LoadingStateAdapter.ViewHolder>() {
+    class ViewHolder(private val binding: LoadingStatePagingBinding, retry: () -> Unit) :
+        RecyclerView.ViewHolder(binding.root) {
         init {
             binding.retryButton.setOnClickListener { retry.invoke() }
         }
-        fun bind (loadState: LoadState) {
+
+        fun bind(loadState: LoadState) {
             if (loadState is LoadState.Error) {
                 binding.errorMsg.text = loadState.error.message
             }
@@ -25,7 +28,7 @@ class LoadingStateAdapter(private val retry: () -> Unit): LoadStateAdapter<Loadi
 
     }
 
-    override fun onBindViewHolder(holder: LoadingStateAdapter.ViewHolder, loadState: LoadState) {
+    override fun onBindViewHolder(holder: ViewHolder, loadState: LoadState) {
         holder.bind(loadState)
 
     }
@@ -33,8 +36,9 @@ class LoadingStateAdapter(private val retry: () -> Unit): LoadStateAdapter<Loadi
     override fun onCreateViewHolder(
         parent: ViewGroup,
         loadState: LoadState
-    ): LoadingStateAdapter.ViewHolder {
-        val binding = LoadingStatePagingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    ): ViewHolder {
+        val binding =
+            LoadingStatePagingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding, retry)
     }
 }

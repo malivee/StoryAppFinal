@@ -13,6 +13,7 @@
         android:layout_height="match_parent" />
 
     <ImageView
+        android:contentDescription="@string/capture_image_content_desc"
         android:id="@+id/capture_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -23,6 +24,7 @@
         app:srcCompat="@drawable/baseline_circle_camera_24" />
 
     <ImageView
+        android:contentDescription="@string/switch_camera_content_desc"
         android:id="@+id/switch_camera"
         android:layout_width="40dp"
         android:layout_height="40dp"

@@ -76,12 +76,10 @@ class RegisterActivity : AppCompatActivity() {
                             binding.edRegisterPassword.setBackgroundResource(R.drawable.text_edit_error)
                             binding.tvError.visibility = View.VISIBLE
                             showLoading(false, binding.progressBar)
-
                         }
 
                         Result.Loading -> {
                             showLoading(true, binding.progressBar)
-
                         }
 
                         is Result.Success -> {

@@ -8,6 +8,7 @@
     tools:context=".view.home.HomepageActivity">
 
     <ImageView
+        android:contentDescription="@string/logo_dicoding_content_desc"
         android:id="@+id/img_logo"
         android:transitionName="logo"
         android:layout_width="0dp"
@@ -20,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
+        android:contentDescription="@string/avatar_content_desc"
         android:id="@+id/img_avatar"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -73,7 +75,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

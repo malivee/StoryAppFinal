@@ -29,7 +29,6 @@ abstract class StoryDatabase : RoomDatabase() {
                     .build()
                     .also { instance = it }
             }
-
     }
 
 }

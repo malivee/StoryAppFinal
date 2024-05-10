@@ -4,10 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -18,9 +16,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.belajar.storyapp.R
 import com.belajar.storyapp.databinding.ActivityHomepageBinding
-import com.belajar.storyapp.helper.Result
 import com.belajar.storyapp.helper.ViewModelFactory
-import com.belajar.storyapp.helper.showLoading
 import com.belajar.storyapp.view.maps.MapsActivity
 import com.belajar.storyapp.view.setting.SettingActivity
 import com.belajar.storyapp.view.story.StoryActivity
@@ -57,43 +53,8 @@ class HomepageActivity : AppCompatActivity() {
             }
         )
         binding.rvStory.layoutManager = layoutManager
-
-
         viewModel.stories.observe(this) {
             adapter.submitData(lifecycle, it)
-//            if (it != null) {
-//                when (it) {
-//                    is Result.Failure -> {
-//                        showLoading(false, binding.progressBar)
-//                        Toast.makeText(
-//                            this@HomepageActivity,
-//                            getString(R.string.error_get_story),
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//
-//                    Result.Loading -> {
-//                        showLoading(true, binding.progressBar)
-//                    }
-//
-//                    is Result.Success -> {
-//                        showLoading(false, binding.progressBar)
-//                        it.let {
-//                            adapter.submitList(it.data.listStory.orEmpty().mapNotNull { it })
-//
-//                        }
-//                    }
-//
-//                }
-//            }
-
-        }
-
-        viewModel.getLoginData().observe(this) {
-            val loginState = it.isLogin
-            val token = it.token
-            Log.d("LOGINSTATEHOME", loginState.toString())
-            Log.d("TOKENSTATEHOME", token.toString())
         }
 
 
@@ -138,7 +99,7 @@ class HomepageActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_MAP ="extra_map"
+        const val EXTRA_MAP = "extra_map"
     }
 
 }

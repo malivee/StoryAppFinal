@@ -14,6 +14,7 @@
         tools:context=".view.detail.DetailActivity">
 
         <ImageView
+            android:contentDescription="@string/logo_dicoding_content_desc"
             android:id="@+id/img_detail_logo"
             android:layout_width="match_parent"
             android:layout_height="72dp"
@@ -25,6 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:contentDescription="@string/photo_posted_content_desc"
             android:id="@+id/iv_detail_photo"
             android:transitionName="profile"
             android:layout_width="match_parent"
@@ -40,6 +42,7 @@
 
 
         <ImageView
+            android:contentDescription="@string/avatar_content_desc"
             android:id="@+id/img_location"
             android:layout_width="50dp"
             android:layout_height="50dp"

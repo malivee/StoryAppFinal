@@ -8,6 +8,7 @@
     tools:context=".view.login.LoginActivity">
 
     <ImageView
+        android:contentDescription="@string/logo_dicoding_content_desc"
         android:id="@+id/img_logo"
         android:transitionName="logo"
         android:layout_width="0dp"
@@ -220,7 +221,6 @@
         app:layout_constraintBottom_toBottomOf="@id/tv_register_here"
         app:layout_constraintTop_toTopOf="@+id/tv_register_here"
         app:layout_constraintStart_toEndOf="@+id/tv_register_here"/>
-
 
     <ProgressBar
         android:id="@+id/progress_bar"

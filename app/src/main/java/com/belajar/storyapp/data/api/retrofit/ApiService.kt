@@ -2,7 +2,6 @@ package com.belajar.storyapp.data.api.retrofit
 
 import com.belajar.storyapp.data.api.response.AllStoryResponse
 import com.belajar.storyapp.data.api.response.DetailResponse
-import com.belajar.storyapp.data.api.response.ListStoryItem
 import com.belajar.storyapp.data.api.response.LoginResponse
 import com.belajar.storyapp.data.api.response.RegisterResponse
 import com.belajar.storyapp.data.api.response.UploadResponse
@@ -66,6 +65,6 @@ interface ApiService {
 
     @GET("stories")
     suspend fun getMapStories(
-        @Query("location")location: Int
+        @Query("location") location: Int
     ): AllStoryResponse
 }

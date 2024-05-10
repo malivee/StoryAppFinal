@@ -58,6 +58,28 @@
     <string name="lat_long">Lat: %1$.6f, Long: %2$.6f</string>
     <string name="open_map">Open map from this location</string>
     <string name="no_location">No location Set For This Story</string>
+    <string name="posted_location">Location of posted stories</string>
+    <string name="current_location">Current Location</string>
+    <string name="map_error">Failed to show the result, please try again</string>
+    <string name="error_map_access">Cannot Access Location, please try again</string>
+
     <string name="retry">Retry</string>
+
+    <string name="capture_image_content_desc">Capture the image</string>
+    <string name="switch_camera_content_desc">Switch your camera</string>
+    <string name="logo_dicoding_content_desc">Logo Dicoding</string>
+    <string name="photo_posted_content_desc">Photo posted by the user</string>
+    <string name="avatar_content_desc">Avatar</string>
+    <string name="menu_carousel_1_content_desc">Menu Carousel 1</string>
+    <string name="menu_carousel_2_content_desc">Menu Carousel 2</string>
+    <string name="menu_carousel_3_content_desc">Menu Carousel 3</string>
+    <string name="photo_uploaded_content_desc">Photo Uploaded</string>
+    <string name="location_symbol_content_desc">Location symbol</string>
+    <string name="no_location_set">No location is set yet</string>
+    <string name="post_with_map">Post with a Location</string>
+    <string name="choose_location">Choose Your Preferred Location</string>
+    <string name="confirm_location">Want to use this location?</string>
+    <string name="confirm">Confirm</string>
+    <string name="maps">Maps</string>
 
 </resources>

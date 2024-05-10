@@ -15,7 +15,7 @@ object DataDummy {
                     -5.132193,
                     "id $i",
                     119.488449,
-                    )
+                )
             storyList.add(story)
         }
         return storyList

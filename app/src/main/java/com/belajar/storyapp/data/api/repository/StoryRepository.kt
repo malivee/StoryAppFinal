@@ -70,34 +70,9 @@ class StoryRepository private constructor(
         }
     }
 
-//    fun getStories(): LiveData<Result<AllStoryResponse>> = liveData {
-////        @OptIn(ExperimentalPagingApi::class)
-////        Pager(
-////            PagingConfig(
-////                pageSize = 5
-////            ),
-////            remoteMediator = StoryRemoteMediator(apiService)
-////        )
-//        emit(Result.Loading)
-//
-//        try {
-//            val client = apiService.getStories(5, 10)
-//            if (client.error == false) {
-//                emit(Result.Success(client))
-//            } else {
-//                Log.e("GetStories", "${client.message}")
-//                emit(Result.Failure(client.message.toString()))
-//            }
-//        } catch (e: HttpException) {
-//            Log.e("GetStoriesHTTP", "${e.message}")
-//            emit(Result.Failure(e.message.toString()))
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//    }
-fun getStories(): LiveData<PagingData<ListStoryItem>> {
-    @OptIn(ExperimentalPagingApi::class)
-    return Pager(
+    fun getStories(): LiveData<PagingData<ListStoryItem>> {
+        @OptIn(ExperimentalPagingApi::class)
+        return Pager(
             PagingConfig(
                 pageSize = 5
             ),
@@ -201,7 +176,11 @@ fun getStories(): LiveData<PagingData<ListStoryItem>> {
 
     companion object {
         private var instance: StoryRepository? = null
-        fun getInstance(apiService: ApiService, authPreference: AuthPreference, database: StoryDatabase): StoryRepository =
+        fun getInstance(
+            apiService: ApiService,
+            authPreference: AuthPreference,
+            database: StoryDatabase
+        ): StoryRepository =
             instance ?: synchronized(this) {
                 instance ?: StoryRepository(apiService, authPreference, database)
             }.also { instance = it }

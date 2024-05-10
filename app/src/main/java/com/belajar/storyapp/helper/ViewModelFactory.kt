@@ -17,7 +17,7 @@ import com.belajar.storyapp.view.story.StoryViewModel
 class ViewModelFactory(private val storyRepository: StoryRepository) :
     ViewModelProvider.NewInstanceFactory() {
 
-    @Suppress("UNCHECK_CAST")
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
             return RegisterViewModel(storyRepository) as T

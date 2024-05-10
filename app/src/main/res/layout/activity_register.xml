@@ -8,6 +8,7 @@
     tools:context=".view.register.RegisterActivity">
 
     <ImageView
+        android:contentDescription="@string/logo_dicoding_content_desc"
         android:id="@+id/img_logo"
         android:transitionName="logo"
         android:layout_width="0dp"

@@ -6,12 +6,12 @@
         android:id="@+id/btn_map_option"
         android:icon="@drawable/baseline_map_24"
         app:showAsAction="always"
-        android:title="Maps" />
+        android:title="@string/maps" />
 
     <item
         android:id="@+id/btn_setting"
         android:icon="@drawable/baseline_settings_24"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:title="@string/setting" />
 
 </menu>

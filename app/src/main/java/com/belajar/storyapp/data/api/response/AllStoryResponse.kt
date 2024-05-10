@@ -15,6 +15,7 @@ data class AllStoryResponse(
     @field:SerializedName("message")
     val message: String? = null
 )
+
 @Entity(tableName = "story")
 data class ListStoryItem(
 

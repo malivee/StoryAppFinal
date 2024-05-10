@@ -13,6 +13,7 @@
     android:layout_height="0dp">
 
     <ImageView
+        android:contentDescription="@string/logo_dicoding_content_desc"
         android:layout_width="match_parent"
         android:layout_height="260dp"
         android:layout_marginHorizontal="16dp"
@@ -23,6 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:contentDescription="@string/photo_uploaded_content_desc"
         android:id="@+id/img_story_photo"
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -48,9 +50,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/img_story_photo" />
 
-
-
-
     <com.belajar.storyapp.customview.ButtonOutline
         android:id="@+id/btn_camera"
         android:layout_width="0dp"
@@ -72,12 +71,13 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <ImageView
+        android:contentDescription="@string/location_symbol_content_desc"
         android:id="@+id/img_location"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/baseline_location_on_24"
         android:background="@color/dark_blue"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@+id/btn_gallery"
@@ -87,7 +87,7 @@
         android:id="@+id/tv_lat_lng"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="No location is set yet"
+        android:text="@string/no_location_set"
         android:fontFamily="sans-serif-condensed-medium"
         android:textStyle="bold"
         android:textSize="14sp"
@@ -95,7 +95,7 @@
         android:background="@color/white"
         android:padding="16dp"
         app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintWidth_percent="0.75"
+        app:layout_constraintWidth_percent="0.7"
         android:layout_marginHorizontal="16dp"
         app:layout_constraintStart_toEndOf="@+id/img_location"
         app:layout_constraintTop_toTopOf="@+id/img_location"
@@ -107,7 +107,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/cyan"
         android:drawableEnd="@drawable/baseline_location_on_24"
-        android:text="Post with a map"
+        android:text="@string/post_with_map"
         android:textColor="@color/white"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -144,7 +144,6 @@
                 android:lines="15" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <Button
         android:id="@+id/button_add"

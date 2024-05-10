@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.belajar.storyapp.data.api.response.AllStoryResponse
 import com.belajar.storyapp.data.api.response.ListStoryItem
 
 @Dao

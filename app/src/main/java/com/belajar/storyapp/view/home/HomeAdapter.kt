@@ -16,7 +16,6 @@ import com.belajar.storyapp.view.detail.DetailActivity
 import com.bumptech.glide.Glide
 
 class HomeAdapter : PagingDataAdapter<ListStoryItem, HomeAdapter.MyViewHolder>(DIFF_CALLBACK) {
-//    private val story = ArrayList<ListStoryItem>()
 
     class MyViewHolder(private val binding: ItemStoriesBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -51,21 +50,11 @@ class HomeAdapter : PagingDataAdapter<ListStoryItem, HomeAdapter.MyViewHolder>(D
         return MyViewHolder(binding)
     }
 
-//    fun submitList(storyList: List<ListStoryItem>) {
-//        story.clear()
-//        story.addAll(storyList)
-//        notifyDataSetChanged()
-//    }
-
-//    override fun getItemCount(): Int = story.size
-
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-//        holder.bind(story[position])
         val item = getItem(position)
         if (item != null) {
             holder.bind(item)
         }
-
     }
 
     companion object {

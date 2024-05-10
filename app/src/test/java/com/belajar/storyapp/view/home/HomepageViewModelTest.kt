@@ -32,10 +32,8 @@ class HomepageViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-
     @Mock
     private lateinit var storyRepository: StoryRepository
-
 
 
     @Test

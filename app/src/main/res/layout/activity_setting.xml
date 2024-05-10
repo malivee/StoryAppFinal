@@ -8,6 +8,7 @@
     tools:context=".view.setting.SettingActivity">
 
     <ImageView
+        android:contentDescription="@string/logo_dicoding_content_desc"
         android:id="@+id/img_logo"
         android:layout_width="0dp"
         android:layout_height="72dp"
@@ -46,6 +47,7 @@
 
 
     <ImageView
+        android:contentDescription="@string/avatar_content_desc"
         android:id="@+id/img_avatar"
         android:transitionName="avatar"
         android:layout_width="59.5dp"
