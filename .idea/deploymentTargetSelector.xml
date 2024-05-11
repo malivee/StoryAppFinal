@@ -7,14 +7,11 @@
       </SelectionState>
       <SelectionState runConfigName="MainActivityTest">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-05-10T19:21:53.897739600Z">
+        <DropdownSelection timestamp="2024-05-11T06:39:00.495880600Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="FirebaseDirectAccess" identifier="reservation=projects/my-firebase-chat-7e378/deviceSessions/session-2sv6x5itdjhw9" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=KJHUEIMZYPWO4HJR" />
             </handle>
-            <template>
-              <DeviceId pluginId="FirebaseDirectAccess" type="TEMPLATE" identifier="model_id=redfin/30" />
-            </template>
           </Target>
         </DropdownSelection>
         <DialogSelection />

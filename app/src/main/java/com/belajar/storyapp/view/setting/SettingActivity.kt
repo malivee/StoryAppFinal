@@ -40,7 +40,6 @@ class SettingActivity : AppCompatActivity() {
         val viewModel: SettingViewModel by viewModels { viewModelFactory }
 
 
-
         viewModel.getData().observe(this) {
             binding.btnName.text = it.name
         }

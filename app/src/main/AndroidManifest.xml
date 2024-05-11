@@ -13,6 +13,7 @@
 
     <application
         android:allowBackup="true"
+        android:screenOrientation="portrait"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -20,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StoryApp"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        tools:ignore="DiscouragedApi">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -29,43 +31,62 @@
         <activity
             android:name=".view.maps.MapsActivity"
             android:exported="true"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".view.setting.SettingActivity"
             android:exported="false"
             android:parentActivityName=".view.home.HomepageActivity"
-            android:theme="@style/Theme.StoryApp.ActionBar" />
+            android:theme="@style/Theme.StoryApp.ActionBar"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".view.detail.DetailActivity"
             android:exported="false"
             android:parentActivityName=".view.home.HomepageActivity"
-            android:theme="@style/Theme.StoryApp.ActionBar" />
+            android:theme="@style/Theme.StoryApp.ActionBar"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".view.camera.CameraActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".view.story.StoryActivity"
             android:exported="false"
             android:theme="@style/Theme.StoryApp.ActionBar"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".view.home.HomepageActivity"
             android:exported="false"
-            android:theme="@style/Theme.StoryApp.ActionBar" />
+            android:theme="@style/Theme.StoryApp.ActionBar"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".view.register.RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".view.login.LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".view.main.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.SplashScreen.StoryApps">
+            android:theme="@style/Theme.SplashScreen.StoryApps"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
