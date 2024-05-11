@@ -18,3 +18,9 @@
 <img src="https://github.com/malivee/StoryAppInitial/assets/100111548/e76b0389-c251-4687-bcc8-c0fe703ae0f0" width="200">
 
 ## Final
+
+*The features added here are:*<br>
+- Paging3 Remote Mediator
+- UI Test & Unit Test
+- Map
+- Loading state paging
