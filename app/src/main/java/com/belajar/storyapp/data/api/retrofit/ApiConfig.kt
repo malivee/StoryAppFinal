@@ -1,6 +1,5 @@
 package com.belajar.storyapp.data.api.retrofit
 
-import android.util.Log
 import com.belajar.storyapp.BuildConfig
 import com.belajar.storyapp.helper.AuthPreference
 import kotlinx.coroutines.flow.firstOrNull
@@ -23,7 +22,6 @@ object ApiConfig {
             val request = it.request()
             val token = runBlocking {
                 val tokenValue = authPreference.getData().firstOrNull()?.token ?: ""
-                Log.i("TOKENINAPI", tokenValue)
                 tokenValue
             }
             val header = request.newBuilder()

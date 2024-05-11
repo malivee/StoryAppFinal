@@ -9,6 +9,7 @@
     tools:context=".view.main.MainActivity">
 
     <ImageView
+        android:contentDescription="@string/logo_dicoding_content_desc"
         android:id="@+id/img_logo"
         android:transitionName="logo"
         android:layout_width="0dp"
@@ -20,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:contentDescription="@string/menu_carousel_1_content_desc"
         android:id="@+id/img_menu_1"
         android:layout_width="0dp"
         android:layout_height="180dp"
@@ -58,6 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title_1" />
 
     <ImageView
+        android:contentDescription="@string/menu_carousel_2_content_desc"
         android:id="@+id/img_menu_2"
         android:layout_width="0dp"
         android:layout_height="180dp"
@@ -95,6 +98,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title_2" />
 
     <ImageView
+        android:contentDescription="@string/menu_carousel_3_content_desc"
         android:id="@+id/img_menu_3"
         android:layout_width="0dp"
         android:layout_height="180dp"
@@ -131,8 +135,6 @@
         app:layout_constraintEnd_toEndOf="@+id/img_menu_3"
         app:layout_constraintStart_toStartOf="@+id/img_menu_3"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_3" />
-
-
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu_1"

@@ -16,6 +16,7 @@
         android:layout_height="match_parent">
         
         <ImageView
+            android:contentDescription="@string/photo_posted_content_desc"
             android:id="@+id/iv_item_photo"
             android:layout_width="match_parent"
             android:layout_height="181dp"

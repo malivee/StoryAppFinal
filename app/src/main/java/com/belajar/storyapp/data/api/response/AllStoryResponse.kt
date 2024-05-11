@@ -1,11 +1,13 @@
 package com.belajar.storyapp.data.api.response
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class AllStoryResponse(
 
     @field:SerializedName("listStory")
-    val listStory: List<ListStoryItem?>? = emptyList(),
+    val listStory: List<ListStoryItem>? = emptyList(),
 
     @field:SerializedName("error")
     val error: Boolean? = null,
@@ -14,6 +16,7 @@ data class AllStoryResponse(
     val message: String? = null
 )
 
+@Entity(tableName = "story")
 data class ListStoryItem(
 
     @field:SerializedName("photoUrl")
@@ -29,11 +32,12 @@ data class ListStoryItem(
     val description: String? = null,
 
     @field:SerializedName("lon")
-    val lon: Any? = null,
+    val lon: Double? = null,
 
+    @PrimaryKey
     @field:SerializedName("id")
-    val id: String? = null,
+    val id: String,
 
     @field:SerializedName("lat")
-    val lat: Any? = null
+    val lat: Double? = null
 )

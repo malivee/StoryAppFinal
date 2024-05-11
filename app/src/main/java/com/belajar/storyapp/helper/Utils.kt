@@ -17,7 +17,7 @@ import java.util.Locale
 
 const val DATE_FORMAT = "ddMMyyyy_HHmmss"
 val date: String = SimpleDateFormat(DATE_FORMAT, Locale.US).format(Date())
-const val MAX_SIZE = 1000000
+const val MAX_SIZE = 1_000_000
 
 
 fun String.toDateFormat(): String {
@@ -68,5 +68,4 @@ fun isValidEmail(email: String): Boolean {
 fun showLoading(isLoading: Boolean, loadingView: ProgressBar) {
     loadingView.visibility = if (isLoading) View.VISIBLE else View.GONE
 }
-
 

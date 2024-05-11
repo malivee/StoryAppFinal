@@ -14,6 +14,7 @@
         tools:context=".view.detail.DetailActivity">
 
         <ImageView
+            android:contentDescription="@string/logo_dicoding_content_desc"
             android:id="@+id/img_detail_logo"
             android:layout_width="match_parent"
             android:layout_height="72dp"
@@ -24,12 +25,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <ImageView
+            android:contentDescription="@string/photo_posted_content_desc"
             android:id="@+id/iv_detail_photo"
             android:transitionName="profile"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="450dp"
             android:layout_margin="16dp"
             android:background="@color/dark_blue"
             android:backgroundTint="@color/black"
@@ -41,7 +42,8 @@
 
 
         <ImageView
-            android:id="@+id/avatar_detail"
+            android:contentDescription="@string/avatar_content_desc"
+            android:id="@+id/img_location"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
@@ -62,8 +64,8 @@
             android:gravity="center"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/avatar_detail"
-            app:layout_constraintTop_toTopOf="@id/avatar_detail"
+            app:layout_constraintStart_toEndOf="@+id/img_location"
+            app:layout_constraintTop_toTopOf="@id/img_location"
             tools:text="@tools:sample/lorem" />
 
 
@@ -91,9 +93,42 @@
             android:layout_marginHorizontal="16dp"
             android:fontFamily="sans-serif-condensed-light"
             android:textSize="11sp"
-            app:layout_constraintStart_toEndOf="@+id/avatar_detail"
+            app:layout_constraintStart_toEndOf="@+id/img_location"
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_name"
             tools:text="@tools:sample/lorem" />
+
+        <ImageView
+            android:contentDescription="@string/open_map"
+            android:id="@+id/img_lat_lng"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/baseline_location_on_24"
+            android:background="@color/dark_blue"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/iv_detail_photo"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_lat_lng"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/no_location"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:gravity="start"
+            android:background="@drawable/outline_btn"
+            android:padding="16dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintWidth_percent="0.75"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintStart_toEndOf="@+id/img_lat_lng"
+            app:layout_constraintTop_toTopOf="@+id/img_lat_lng"
+            app:layout_constraintBottom_toBottomOf="@+id/img_lat_lng"/>
+
+
 
 
         <TextView
@@ -108,7 +143,7 @@
             android:text="@string/cta_story_title"
             android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@+id/iv_detail_photo"
+            app:layout_constraintTop_toBottomOf="@+id/tv_lat_lng"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button

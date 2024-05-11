@@ -64,24 +64,25 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.btnRegRegister.setOnClickListener {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
+
             viewModel.postRegister(
                 binding.edRegisterName.text.toString(),
                 binding.edRegisterEmail.text.toString(),
                 binding.edRegisterPassword.text.toString()
-            ).observe(this) {
-                if (it != null) {
-                    when (it) {
+            ).observe(this) {result ->
+                if (result != null) {
+                    when (result) {
                         is Result.Failure -> {
                             binding.edRegisterEmail.setBackgroundResource(R.drawable.text_edit_error)
                             binding.edRegisterPassword.setBackgroundResource(R.drawable.text_edit_error)
                             binding.tvError.visibility = View.VISIBLE
                             showLoading(false, binding.progressBar)
-
                         }
 
                         Result.Loading -> {
                             showLoading(true, binding.progressBar)
-
                         }
 
                         is Result.Success -> {

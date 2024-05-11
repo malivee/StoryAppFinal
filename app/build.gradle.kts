@@ -2,12 +2,20 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
+    alias(libs.plugins.googleAndroidLibrariesMapsplatformSecretsGradlePlugin)
 
 }
 
+@Suppress("UnstableApiUsage")
 android {
     namespace = "com.belajar.storyapp"
     compileSdk = 34
+
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+        }
+
 
     defaultConfig {
         applicationId = "com.belajar.storyapp"
@@ -31,17 +39,32 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+        freeCompilerArgs = (freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn").toMutableList()
+
     }
 
-    buildFeatures { 
+    buildFeatures {
         viewBinding = true
         buildConfig = true
     }
+
+    secrets {
+        propertiesFileName = "secrets.properties"
+
+        defaultPropertiesFileName = "local.properties"
+
+        ignoreList.add("keyToIgnore")
+        ignoreList.add("sdk.*")
+    }
+    testOptions {
+        animationsDisabled = true
+    }
+
 }
 
 dependencies {
@@ -55,30 +78,53 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation("androidx.activity:activity-ktx:1.9.0")
+    implementation(libs.androidx.activity.ktx)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
-    implementation("com.github.yalantis:ucrop:2.2.8")
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-    implementation("androidx.core:core-splashscreen:1.0.0")
-    implementation("io.coil-kt:coil:1.4.0")
+    implementation(libs.ucrop)
+    implementation(libs.glide)
+    implementation(libs.androidx.core.splashscreen)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    implementation(libs.kotlinx.coroutines.android.v180)
+    implementation(libs.kotlinx.coroutines.core.v180)
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
-    implementation("androidx.datastore:datastore-preferences:1.1.0")
+    implementation(libs.androidx.datastore.preferences)
 
-    implementation("androidx.camera:camera-camera2:1.3.3")
-    implementation("androidx.camera:camera-lifecycle:1.3.3")
-    implementation("androidx.camera:camera-view:1.3.3")
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+
+    implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.room.paging)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    implementation(libs.play.services.location)
+    implementation(libs.play.services.maps)
+
+    testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
+
+    debugImplementation(libs.androidx.fragment.testing)
+
+    androidTestImplementation(libs.androidx.core.testing)
+    androidTestImplementation(libs.kotlinx.coroutines.test.v171)
+
+    implementation(libs.androidx.espresso.idling.resource)
+
+    androidTestImplementation(libs.androidx.espresso.intents)
+
 
 }

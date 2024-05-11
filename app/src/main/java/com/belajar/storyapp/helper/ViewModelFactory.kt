@@ -9,6 +9,7 @@ import com.belajar.storyapp.view.detail.DetailViewModel
 import com.belajar.storyapp.view.home.HomepageViewModel
 import com.belajar.storyapp.view.login.LoginViewModel
 import com.belajar.storyapp.view.main.MainViewModel
+import com.belajar.storyapp.view.maps.MapsViewModel
 import com.belajar.storyapp.view.register.RegisterViewModel
 import com.belajar.storyapp.view.setting.SettingViewModel
 import com.belajar.storyapp.view.story.StoryViewModel
@@ -16,7 +17,7 @@ import com.belajar.storyapp.view.story.StoryViewModel
 class ViewModelFactory(private val storyRepository: StoryRepository) :
     ViewModelProvider.NewInstanceFactory() {
 
-    @Suppress("UNCHECK_CAST")
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
             return RegisterViewModel(storyRepository) as T
@@ -38,6 +39,9 @@ class ViewModelFactory(private val storyRepository: StoryRepository) :
         }
         if (modelClass.isAssignableFrom(SettingViewModel::class.java)) {
             return SettingViewModel(storyRepository) as T
+        }
+        if (modelClass.isAssignableFrom(MapsViewModel::class.java)) {
+            return MapsViewModel(storyRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModal class: ${modelClass.name}")
 

@@ -36,6 +36,7 @@ import com.belajar.storyapp.helper.uriToFile
 import com.belajar.storyapp.view.camera.CameraActivity
 import com.belajar.storyapp.view.home.HomepageActivity
 import com.belajar.storyapp.view.main.MainActivity
+import com.belajar.storyapp.view.maps.MapsActivity
 import com.belajar.storyapp.view.setting.SettingActivity
 import com.yalantis.ucrop.UCrop
 import okhttp3.MediaType.Companion.toMediaType
@@ -47,8 +48,10 @@ class StoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoryBinding
     private var currentImageUri: Uri? = null
+    private var latitude: String? = null
+    private var longitude: String? = null
 
-    private val viewModelFactory = ViewModelFactory.getInstance(this@StoryActivity)
+    private val viewModelFactory = ViewModelFactory.getInstance(this)
     private val viewModel: StoryViewModel by viewModels { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,8 +65,6 @@ class StoryActivity : AppCompatActivity() {
             insets
         }
 
-
-
         supportActionBar?.apply {
             title = null
             viewModel.getLoginData().observe(this@StoryActivity) {
@@ -71,7 +72,6 @@ class StoryActivity : AppCompatActivity() {
                     setHomeButtonEnabled(false)
                     setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
                     setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
 
                 } else {
                     setHomeButtonEnabled(true)
@@ -101,6 +101,7 @@ class StoryActivity : AppCompatActivity() {
 
         binding.buttonAdd.setOnClickListener {
             viewModel.getLoginData().observe(this) {
+                setupData()
                 if (it.isLogin) {
                     postStory()
                 } else {
@@ -109,120 +110,144 @@ class StoryActivity : AppCompatActivity() {
             }
         }
 
-    }
+        binding.btnMaps.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            val transition = ActivityOptionsCompat.makeSceneTransitionAnimation(this)
 
-
-    private fun postStory() {
-        currentImageUri.let {
-            val imageFile = it?.let { uri -> uriToFile(uri, this@StoryActivity).reduceFileImage() }
-            val description = binding.edAddDescription.text.toString()
-
-            val requestBody = description.toRequestBody("text/plain".toMediaType())
-            val requestImageFile = imageFile?.asRequestBody("image/jpeg".toMediaType())
-
-            val multipartBody = requestImageFile?.let { file ->
-                MultipartBody.Part.createFormData(
-                    "photo",
-                    description,
-                    file
-                )
-            }
-
-            if (multipartBody != null) {
-                viewModel.postStory(multipartBody, requestBody).observe(this) {
-                    if (it != null) {
-                        when (it) {
-                            is Result.Failure -> {
-                                Toast.makeText(
-                                    this@StoryActivity,
-                                    getString(R.string.error_post_story),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                showLoading(false, binding.progressBar)
-                            }
-
-                            Result.Loading -> {
-                                showLoading(true, binding.progressBar)
-                            }
-
-                            is Result.Success -> {
-                                showLoading(false, binding.progressBar)
-                                Toast.makeText(
-                                    this@StoryActivity,
-                                    it.data.message,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                val intent = Intent(this, HomepageActivity::class.java)
-                                val optionsCompat: ActivityOptionsCompat =
-                                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                        this@StoryActivity,
-                                        Pair(binding.imgStoryPhoto, "logo"),
-                                        Pair(binding.edAddDescription, "text")
-                                    )
-                                startActivity(intent, optionsCompat.toBundle())
-                                finish()
-                            }
-                        }
-                    }
-                }
-            }
-
-
+            mapsActivityLauncher.launch(intent, transition)
         }
     }
 
+    private val mapsActivityLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == MapsActivity.EXTRA_RESULT) {
+            latitude = it.data?.getStringExtra(MapsActivity.EXTRA_LAT)
+            longitude = it.data?.getStringExtra(MapsActivity.EXTRA_LNG)
 
-    private fun postStoryGuest() {
+            binding.tvLatLng.text = String.format(
+                getString(R.string.lat_long),
+                latitude?.toFloat(),
+                longitude?.toFloat()
+            )
+        }
+    }
+
+    private fun setupData() {
         currentImageUri?.let {
-            val imageFile = uriToFile(it, this@StoryActivity)
+            val imageFile = uriToFile(it, this@StoryActivity).reduceFileImage()
             val description = binding.edAddDescription.text.toString()
 
-            val requestBody = description.toRequestBody("text/plain".toMediaType())
+            val requestBodyDesc = description.toRequestBody("text/plain".toMediaType())
             val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+            val requestBodyLat = latitude?.toRequestBody("text/plain".toMediaType())
+            val requestBodyLng = longitude?.toRequestBody("text/plain".toMediaType())
 
-            val multipartBody =
-                MultipartBody.Part.createFormData(
-                    "photo",
-                    description,
-                    requestImageFile
-                )
+            val multipartBody = MultipartBody.Part.createFormData(
+                "photo",
+                description,
+                requestImageFile
+            )
+            viewModel.getLoginData().observe(this) {
+                if (it.isLogin) {
+                    viewModel.postStory(
+                        multipartBody,
+                        requestBodyDesc,
+                        requestBodyLat,
+                        requestBodyLng
+                    )
+                } else {
+                    viewModel.postStoryGuest(
+                        multipartBody,
+                        requestBodyDesc,
+                        requestBodyLat,
+                        requestBodyLng
+                    )
+                }
+            }
+        }
+    }
 
-            viewModel.postStoryGuest(multipartBody, requestBody).observe(this@StoryActivity) {
-                if (it != null) {
-                    when (it) {
-                        is Result.Failure -> {
-                            Toast.makeText(
+    private fun postStory() {
+        viewModel.stories.observe(this) { result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Failure -> {
+                        Toast.makeText(
+                            this@StoryActivity,
+                            getString(R.string.error_post_story),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        showLoading(false, binding.progressBar)
+                    }
+
+                    Result.Loading -> {
+                        showLoading(true, binding.progressBar)
+                    }
+
+                    is Result.Success -> {
+                        showLoading(false, binding.progressBar)
+                        Toast.makeText(
+                            this@StoryActivity,
+                            result.data.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val intent = Intent(this, HomepageActivity::class.java)
+                        val optionsCompat: ActivityOptionsCompat =
+                            ActivityOptionsCompat.makeSceneTransitionAnimation(
                                 this@StoryActivity,
-                                getString(R.string.error_post_story),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            showLoading(false, binding.progressBar)
-                        }
+                                Pair(binding.imgStoryPhoto, "logo"),
+                                Pair(binding.edAddDescription, "text")
+                            )
+                        startActivity(intent, optionsCompat.toBundle())
+                        finish()
+                    }
 
-                        Result.Loading -> {
-                            showLoading(true, binding.progressBar)
-                        }
+                }
+            }
 
-                        is Result.Success -> {
-                            showLoading(false, binding.progressBar)
-                            val intent =
-                                Intent(this@StoryActivity, MainActivity::class.java)
-                            val optionsCompat: ActivityOptionsCompat =
-                                ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                    this@StoryActivity,
-                                    Pair(binding.imgStoryPhoto, "logo")
-                                )
-                            startActivity(intent, optionsCompat.toBundle())
-                            finish()
-                            Toast.makeText(
+        }
+
+    }
+
+    private fun postStoryGuest() {
+        viewModel.storiesGuest.observe(this) { result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Failure -> {
+                        Toast.makeText(
+                            this@StoryActivity,
+                            getString(R.string.error_post_story),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        showLoading(false, binding.progressBar)
+                    }
+
+                    Result.Loading -> {
+                        showLoading(true, binding.progressBar)
+                    }
+
+                    is Result.Success -> {
+                        showLoading(false, binding.progressBar)
+                        val intent =
+                            Intent(this@StoryActivity, MainActivity::class.java)
+                        val optionsCompat: ActivityOptionsCompat =
+                            ActivityOptionsCompat.makeSceneTransitionAnimation(
                                 this@StoryActivity,
-                                it.data.message,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                                Pair(binding.imgStoryPhoto, "logo")
+                            )
+                        startActivity(intent, optionsCompat.toBundle())
+                        finish()
+                        Toast.makeText(
+                            this@StoryActivity,
+                            result.data.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
+
+
         }
     }
 
@@ -230,6 +255,7 @@ class StoryActivity : AppCompatActivity() {
         this,
         REQUIRED_PERMISSION
     ) == PackageManager.PERMISSION_GRANTED
+
 
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -241,6 +267,7 @@ class StoryActivity : AppCompatActivity() {
         }
     }
 
+
     private val cameraXLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -249,6 +276,7 @@ class StoryActivity : AppCompatActivity() {
             showImage()
         }
     }
+
 
     private val galleryLauncher = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -300,14 +328,15 @@ class StoryActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.option_menu, menu)
+        menu?.findItem(R.id.btn_map_option)?.apply {
+            isVisible = false
+        }
+
         viewModel.getLoginData().observe(this@StoryActivity) {
-            if (it.isLogin) {
-                menuInflater.inflate(R.menu.option_menu, menu)
+            if (!it.isLogin) {
+                menu?.clear()
 
-            } else {
-
-                val settingItem = menu?.findItem(R.id.btn_setting)
-                settingItem?.icon?.setTint(ContextCompat.getColor(this, R.color.white))
             }
         }
         return super.onCreateOptionsMenu(menu)
@@ -330,7 +359,21 @@ class StoryActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        currentImageUri?.let { outState.putString(KEY_IMAGE_URI, it.toString()) }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState.getString(KEY_IMAGE_URI)?.let {
+            currentImageUri = it.toUri()
+            binding.imgStoryPhoto.setImageURI(it.toUri())
+        }
+    }
+
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+        private const val KEY_IMAGE_URI = "key_image_uri"
     }
 }

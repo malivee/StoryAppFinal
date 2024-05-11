@@ -16,6 +16,7 @@
         android:layout_marginBottom="16dp">
 
         <ImageView
+            android:contentDescription="@string/avatar_content_desc"
             android:id="@+id/avatar_detail"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -39,13 +40,6 @@
             android:layout_marginHorizontal="16dp"
             card_view:layout_constraintStart_toEndOf="@+id/avatar_detail"
             card_view:layout_constraintTop_toTopOf="@id/avatar_detail"/>
-
-
-
-
-
-
-
 
         <TextView
             android:id="@+id/tv_detail_description"

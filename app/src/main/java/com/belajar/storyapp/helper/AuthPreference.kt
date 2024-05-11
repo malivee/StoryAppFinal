@@ -13,12 +13,9 @@ import kotlinx.coroutines.flow.map
 
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
-
 class AuthPreference private constructor(
     private val dataStore: DataStore<Preferences>
 ) {
-
-
     suspend fun saveData(dataModel: DataModel) {
         dataStore.edit {
             it[NAME] = dataModel.name

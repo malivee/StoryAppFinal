@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.enableEdgeToEdge
@@ -85,11 +84,15 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogLogin.setOnClickListener {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
+
             val email = binding.edLoginEmail.text.toString()
             val password = binding.edLoginPassword.text.toString()
-            viewModel.postLogin(email, password).observe(this) {
-                if (it != null) {
-                    when (it) {
+            viewModel.postLogin(email, password).observe(this) { result ->
+
+                if (result != null) {
+                    when (result) {
                         is Result.Failure -> {
                             binding.edLoginEmail.setBackgroundResource(R.drawable.text_edit_error)
                             binding.edLoginPassword.setBackgroundResource(R.drawable.text_edit_error)
@@ -103,8 +106,8 @@ class LoginActivity : AppCompatActivity() {
 
                         is Result.Success -> {
                             showLoading(false, binding.progressBar)
-                            val token = it.data.loginResult?.token.toString()
-                            val name = it.data.loginResult?.name.toString()
+                            val token = result.data.loginResult?.token.toString()
+                            val name = result.data.loginResult?.name.toString()
                             viewModel.saveData(
                                 DataModel(
                                     name,
@@ -112,9 +115,7 @@ class LoginActivity : AppCompatActivity() {
                                 )
                             )
                             val intent = Intent(this@LoginActivity, HomepageActivity::class.java)
-                            intent.flags =
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                            Log.i("TOKEN", token)
+//
                             val optionsCompat: ActivityOptionsCompat =
                                 ActivityOptionsCompat.makeSceneTransitionAnimation(
                                     this@LoginActivity,
