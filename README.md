@@ -18,5 +18,6 @@
 *The features added here are:*<br>
 - Paging3 Remote Mediator
 - UI Test & Unit Test
-- Map
+- Map showing location of the post
+- Map to set the location
 - Loading state paging
